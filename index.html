@@ -4,480 +4,774 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#030712">
-<meta name="description" content="IOIS Platform - Indian Online Income Supporting System. Digital resources, career tools, creator resources and membership plans.">
 <title>IOIS PLATFORM | Indian Online Income Supporting System</title>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<link rel="stylesheet" href="style.css">
 <style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    min-height: 100vh;
-    background: radial-gradient(circle at 10% 10%, rgba(249,115,22,.12), transparent 30%),
-                radial-gradient(circle at 90% 20%, rgba(20,184,166,.10), transparent 30%),
-                #030712;
-    color: white;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  }
-  .glass {
-    background: rgba(15, 23, 42, 0.90);
-    border: 1px solid rgba(245, 158, 11, 0.25);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 25px 80px rgba(0,0,0,0.6);
-  }
-  .input-box {
-    width: 100%;
-    background: rgba(2, 6, 23, 0.85);
-    border: 1px solid rgba(100, 116, 139, 0.55);
-    color: white;
-    transition: .2s ease;
-  }
-  .input-box:focus {
-    outline: none;
-    border-color: #f59e0b;
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
-  }
-  .gradient-text {
-    background: linear-gradient(90deg, #f97316, #ffffff, #10b981);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .btn-gradient {
-    background: linear-gradient(90deg, #fbbf24, #14b8a6);
-    color: #020617;
-    font-weight: bold;
-    transition: .2s ease;
-  }
-  .btn-gradient:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(20, 184, 166, 0.3);
-  }
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 100;
-    padding: 1rem;
-  }
   .hidden-section { display: none !important; }
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px); display: flex; align-items: center;
+    justify-content: center; z-index: 100; padding: 1rem;
+  }
+  .glass-box {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    backdrop-filter: blur(20px); border-radius: 1.5rem;
+  }
+  .input-field {
+    width: 100%; background: rgba(2, 6, 23, 0.85);
+    border: 1px solid rgba(100, 116, 139, 0.5); color: white;
+    padding: 0.75rem 1rem; border-radius: 0.75rem; font-size: 0.875rem; outline: none;
+  }
+  .input-field:focus { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2); }
+  .btn-gradient {
+    background: linear-gradient(90deg, #f59e0b, #10b981);
+    color: #020617; font-weight: 800; transition: all 0.2s ease;
+  }
+  .btn-gradient:hover { opacity: 0.95; transform: translateY(-1px); }
+  .poster-3d {
+    background: linear-gradient(135deg, #1e1b4b, #0f172a);
+    border: 2px solid #f59e0b; box-shadow: 0 20px 50px rgba(245, 158, 11, 0.2);
+  }
 </style>
 </head>
-<body>
+<body class="bg-gray-950 text-white min-h-screen">
 
-<div class="bg-amber-500/10 border-b border-amber-500/20 text-amber-300 text-xs py-2 px-4 flex justify-between items-center">
-  <div class="font-bold flex items-center gap-2">
-    <span class="bg-amber-500 text-black text-[10px] px-1.5 py-0.5 rounded font-black">LIVE</span>
-    🔥 IOIS PLATFORM — ₹10 से शुरुआत करें! Membership Plans (₹10 - ₹999)
-  </div>
-  <div class="hidden sm:block text-[11px] text-gray-400">
-    📧 ioisplatform@gmail.com | 📱 +91 8877490845
-  </div>
+<!-- LIVE TICKER -->
+<div class="live-update">
+  <span class="live-badge">LIVE UPDATE</span>
+  <div class="ticker-wrap"><div class="ticker">
+    🔥 IOIS PLATFORM — मात्र ₹10 से शुरू करें! Digital Kit, 3D Tiranga Card, Career Resources और Referral Ecosystem का हिस्सा बनें।
+  </div></div>
 </div>
 
-<header class="border-b border-white/10 bg-gray-950/90 backdrop-blur-xl sticky top-0 z-40">
-  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center gap-3 cursor-pointer" onclick="showHome()">
-      <img src="assets/logo.png" alt="IOIS Logo" onerror="this.src='https://via.placeholder.com/45?text=IOIS'" class="w-11 h-11 object-contain rounded-xl border border-amber-500/40">
-      <div>
-        <div class="text-lg font-black gradient-text">IOIS PLATFORM</div>
-        <div class="text-[8px] text-teal-400 font-bold uppercase tracking-widest">Indian Online Income Supporting System</div>
-      </div>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="javascript:void(0)" onclick="showHome()" class="brand">
+      <img src="assets/logo.png" alt="IOIS Logo" onerror="this.style.display='none'">
+      <span>
+        <b class="tiranga-text">IOIS PLATFORM</b>
+        <small>Indian Online Income Supporting System</small>
+      </span>
+    </a>
+    <nav class="desktop-nav">
+      <a class="active" href="javascript:void(0)" onclick="showHome()"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#plans"><i class="fa-solid fa-layer-group"></i> 7 Plans</a>
+      <a href="#services"><i class="fa-solid fa-toolbox"></i> Services</a>
+      <a href="#examples"><i class="fa-solid fa-chart-line"></i> Examples</a>
+      <a href="news.html"><i class="fa-solid fa-newspaper"></i> समाचार</a>
+      <a href="jobs.html"><i class="fa-solid fa-briefcase"></i> Jobs</a>
+      <a href="panchang.html"><i class="fa-solid fa-calendar-days"></i> पंचांग</a>
+      <a href="chat.html"><i class="fa-solid fa-comments"></i> Chat</a>
+    </nav>
+
+    <div id="guest-actions" class="header-actions">
+      <button class="btn-outline" onclick="openLoginModal()">Login</button>
+      <button class="btn-primary" onclick="openRegistrationFlow()">Join IOIS</button>
     </div>
 
-    <!-- GUEST NAV -->
-    <div id="nav-guest" class="flex items-center gap-3">
-      <button onclick="openModal('login-modal')" class="text-xs text-gray-300 hover:text-amber-400 font-bold px-3 py-2 rounded-lg border border-white/10 hover:border-amber-400/40">
-        <i class="fa-solid fa-right-to-bracket mr-1"></i> Login
-      </button>
-      <button onclick="openModal('register-modal')" class="btn-gradient text-xs px-4 py-2 rounded-lg">
-        <i class="fa-solid fa-user-plus mr-1"></i> Join IOIS
-      </button>
-    </div>
-
-    <!-- USER NAV -->
-    <div id="nav-user" class="hidden flex items-center gap-3">
-      <span id="nav-user-id" class="text-xs text-amber-400 font-bold bg-amber-400/10 px-3 py-1.5 rounded-full border border-amber-400/20"></span>
-      <button onclick="logoutUser()" class="text-xs text-red-400 hover:text-red-300 font-bold px-3 py-2 rounded-lg border border-red-500/20 bg-red-500/10">
-        <i class="fa-solid fa-power-off mr-1"></i> Logout
-      </button>
+    <div id="user-actions" class="header-actions hidden-section">
+      <span id="nav-user-id" class="text-xs font-bold text-amber-400 bg-amber-400/10 px-3 py-1.5 rounded-full border border-amber-400/30"></span>
+      <button class="btn-outline text-red-400 border-red-500/30 hover:bg-red-500/10" onclick="logoutUser()">Logout</button>
     </div>
   </div>
 </header>
 
-<main class="max-w-7xl mx-auto px-4 py-8">
+<main>
+<!-- HOME SECTION -->
+<div id="home-content">
+  <section class="section hero-section">
+    <div class="container">
+      <div class="room-wall">
+        <div class="clock-panel">
+          <div class="panel-title"><span><i class="fa-solid fa-clock"></i> IOIS Live Clock</span><i class="live-dot"></i></div>
+          <div id="digital-clock" class="digital-clock">12:00:00 AM</div>
+          <div class="analog-clock">
+            <div class="clock-number"><span class="n12">12</span><span class="n3">3</span><span class="n6">6</span><span class="n9">9</span></div>
+            <div id="clock-hour" class="clock-hand hour-hand"></div>
+            <div id="clock-min" class="clock-hand minute-hand"></div>
+            <div id="clock-sec" class="clock-hand second-hand"></div>
+            <div class="clock-center"></div>
+          </div>
+          <div id="clock-date" class="muted">तारीख लोड हो रही है...</div>
+        </div>
 
-  <!-- HOME SECTION -->
-  <div id="home-section">
-    <section class="text-center py-10">
-      <div class="inline-flex px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold mb-4">
-        <i class="fa-solid fa-shield-halved mr-1.5"></i> Single Page Platform Architecture
-      </div>
-      <h1 class="text-3xl sm:text-5xl font-black gradient-text mb-4">Indian Online Income<br>Supporting System</h1>
-      <p class="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm mb-6">
-        IOIS एक डिजिटल प्लेटफॉर्म है जो स्टूडेंट्स, जॉब सीकर्स और डिजिटल क्रिएटर्स को अफोर्डेबल डिजिटल रिसोर्सेज और करियर टूल्स उपलब्ध कराने के लिए बनाया गया है।
-      </p>
-      <div class="flex justify-center gap-4">
-        <button onclick="openModal('register-modal')" class="btn-gradient px-6 py-3 rounded-xl text-xs font-bold">🚀 Join IOIS @ ₹10</button>
-      </div>
-    </section>
+        <div class="weather-panel">
+          <div class="satellite-label"><i class="fa-solid fa-satellite"></i> GPS Satellite Location</div>
+          <div class="weather-scene">
+            <div class="weather-info">
+              <div id="weather-temp" class="weather-temp">28°C</div>
+              <div id="weather-status">☀️ Clear Sky - India</div>
+              <small>IOIS Weather Station</small>
+            </div>
+          </div>
+        </div>
 
-    <!-- PLANS LIST -->
-    <section class="py-6">
-      <h2 class="text-xl font-bold text-center text-amber-400 mb-6">IOIS 7 Membership Plans</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto">
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹10</div>
-          <div class="text-xs text-gray-300">Starter Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹49</div>
-          <div class="text-xs text-gray-300">Basic Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹99</div>
-          <div class="text-xs text-gray-300">Standard Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹199</div>
-          <div class="text-xs text-gray-300">Advanced Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹399</div>
-          <div class="text-xs text-gray-300">Pro Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center">
-          <div class="text-lg font-black text-amber-400">₹699</div>
-          <div class="text-xs text-gray-300">Elite Plan</div>
-        </div>
-        <div class="glass p-4 rounded-xl text-center col-span-2 sm:col-span-2">
-          <div class="text-lg font-black text-amber-400">₹999</div>
-          <div class="text-xs text-gray-300">Master Plan</div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- DASHBOARD SECTION (SINGLE PAGE VIEW) -->
-  <div id="dashboard-section" class="hidden-section max-w-2xl mx-auto">
-    <div class="glass rounded-3xl p-6 sm:p-8">
-      <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
-        <div>
-          <h2 class="text-2xl font-black text-amber-400" id="dash-name">User Dashboard</h2>
-          <p class="text-xs text-gray-400">Your Unique ID: <span id="dash-userid" class="text-teal-400 font-mono font-bold"></span></p>
-        </div>
-        <div class="bg-teal-500/10 border border-teal-500/20 px-3 py-1 rounded-full text-xs text-teal-400 font-bold">
-          Active Member
+        <div class="smart-panel">
+          <div class="panel-title"><span><i class="fa-solid fa-box-archive"></i> SMART SYSTEM</span><b>IOIS</b></div>
+          <div class="smart-content">
+            <p>✨ आज का शुभ रंग: <strong>केसरिया & हरा</strong></p>
+            <p>⏰ शुभ मुहूर्त: <strong>24x7 Digital Access</strong></p>
+            <p>IOIS Platform - All Digital Assets Ready</p>
+          </div>
         </div>
       </div>
 
-      <!-- DIRECT FILE UPLOAD -->
-      <div class="space-y-4">
-        <h3 class="text-sm font-bold text-gray-300"><i class="fa-solid fa-cloud-arrow-up mr-2 text-amber-400"></i>Upload Document / Receipt for Verification</h3>
-        <form id="upload-form" onsubmit="handleFileUpload(event)" class="space-y-4">
-          <input type="file" id="upload-file" required class="input-box rounded-xl p-3 text-sm">
-          <button type="submit" id="upload-btn" class="btn-gradient w-full py-3.5 rounded-xl text-sm font-bold">
-            Upload Direct To Verification System
+      <!-- SMART TV WITH AD-FREE PLAYLIST PLAYER -->
+      <div class="smart-tv">
+        <div class="tv-head flex flex-wrap gap-2 justify-between items-center bg-gray-900 p-3 rounded-t-xl">
+          <b class="text-amber-400"><i class="fa-solid fa-tv mr-1"></i> IOIS Smart TV</b>
+          <div class="flex items-center gap-2">
+            <button onclick="openChromeBrowser()" class="px-2.5 py-1 text-xs bg-gray-800 hover:bg-gray-700 rounded text-gray-200"><i class="fa-brands fa-chrome mr-1"></i> Chrome</button>
+            <button onclick="loadDefaultYouTube()" class="px-2.5 py-1 text-xs bg-red-600/80 hover:bg-red-600 rounded text-white"><i class="fa-brands fa-youtube mr-1"></i> YouTube</button>
+          </div>
+        </div>
+        
+        <div class="bg-gray-900/90 border-t border-b border-white/10 p-2 flex gap-2">
+          <input type="text" id="playlist-url-input" placeholder="Paste YouTube Video or Playlist Link here..." class="flex-1 bg-gray-950 border border-amber-500/30 text-xs px-3 py-1.5 rounded text-white focus:outline-none focus:border-amber-400">
+          <button onclick="playCustomPlaylist()" class="bg-amber-500 hover:bg-amber-400 text-black text-xs font-bold px-4 py-1.5 rounded flex items-center gap-1">
+            <i class="fa-solid fa-play"></i> Play Ad-Free
           </button>
+        </div>
+
+        <div class="tv-screen h-80 bg-black">
+          <iframe id="tv-iframe" class="w-full h-full" src="https://www.youtube-nocookie.com/embed/0gYd3mIxksc?autoplay=0&rel=0&modestbranding=1" title="IOIS Smart TV" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="hero-card mt-8 text-center">
+        <span class="eyebrow">🇮🇳 Indian Digital Platform</span>
+        <h1 class="tiranga-text">Indian Online Income<br>Supporting System</h1>
+        <p>मात्र ₹10 से शुरू करें! Digital Kit, 3D Tiranga Card, Career Resources और referral ecosystem का हिस्सा बनें।</p>
+        <div class="hero-buttons flex justify-center gap-4 mt-4">
+          <button class="btn-gradient px-6 py-3 rounded-xl font-bold" onclick="openRegistrationFlow()">🚀 Join IOIS @ ₹10</button>
+          <button class="btn-outline large px-6 py-3 rounded-xl font-bold" onclick="scrollToPlans()">📦 View 7 Plans</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="plans">
+    <div class="container">
+      <div class="section-heading"><span>MEMBERSHIP</span><h2>IOIS 7 Master Plans</h2><p>₹10 से ₹999 तक के digital membership options</p></div>
+      <div id="plans-grid" class="plans-grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="examples">
+    <div class="container narrow">
+      <div class="section-heading"><span>PRACTICAL EXAMPLES</span><h2>21 Detailed Referral Examples</h2></div>
+      <div id="examples-list" class="examples-list"></div>
+    </div>
+  </section>
+</div>
+
+<!-- SINGLE PAGE REGISTRATION SECTION -->
+<div id="registration-section" class="container hidden-section py-8 max-w-4xl mx-auto">
+  <div class="glass-box p-6 sm:p-10 border border-amber-500/40">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl sm:text-3xl font-black tiranga-text mb-2">Indian Online Income Supporting System</h1>
+      <p class="text-xs sm:text-sm text-gray-300">मात्र ₹10 से शुरू करें! Digital Kit, 3D Tiranga Card, Career Resources और referral ecosystem का हिस्सा बनें।</p>
+    </div>
+
+    <form id="iois-master-reg-form" onsubmit="handleRegistrationSubmit(event)" class="space-y-8">
+      
+      <!-- SECTION 1 -->
+      <div class="border-b border-white/10 pb-6">
+        <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2"><span class="bg-amber-500 text-black w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">1</span> OPEN REFERRAL POWER</h3>
+        <p class="text-xs text-gray-400 mb-4">खुली अर्निंग का उदाहरण: आप चाहे ₹10 वाले plan में हों, अगर आपका referral ₹49 Gold Plan लेता है तो लागू referral structure के अनुसार direct payout मिलेगा।</p>
+        
+        <label class="block text-xs font-bold text-gray-300 mb-2">Select Membership Plan *</label>
+        <select id="reg-plan-select" onchange="updatePlanDetails()" class="input-field bg-gray-900 mb-4">
+          <option value="10" selected>1. Tiranga Silver - ₹10 (Starter - ₹7 Direct)</option>
+          <option value="49">2. Tiranga Gold Pro - ₹49 (Pro Kit - ₹35 Direct)</option>
+          <option value="99">3. Tiranga Platinum - ₹99 (Executive - ₹70 Direct)</option>
+          <option value="199">4. Tiranga Crystal VIP - ₹199 (Passive Bonus - ₹120 Direct)</option>
+          <option value="299">5. Govt Exam Pass - ₹299 (Exam Pass - ₹220 Direct)</option>
+          <option value="499">6. Tiranga Diamond - ₹499 (Agency Pass - ₹375 Direct)</option>
+          <option value="999">7. VIP Mastermind - ₹999 (Freelancing & AI Pass - ₹750 Direct)</option>
+        </select>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-950 p-4 rounded-xl border border-white/10 text-xs">
+          <div><span class="text-gray-400 block">Selected Plan:</span><b id="card-plan-name" class="text-amber-400">Tiranga Silver</b></div>
+          <div><span class="text-gray-400 block">Amount:</span><b id="card-plan-amt" class="text-white">₹10</b></div>
+          <div><span class="text-gray-400 block">Direct Referral:</span><b id="card-plan-payout" class="text-emerald-400">₹7</b></div>
+          <div><span class="text-gray-400 block">Status:</span><b class="text-emerald-400">READY</b></div>
+        </div>
+      </div>
+
+      <!-- SECTION 2 -->
+      <div class="border-b border-white/10 pb-6 space-y-4">
+        <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2"><span class="bg-amber-500 text-black w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">2</span> Member Details</h3>
+        <p class="text-xs text-gray-400">सही जानकारी भरें। इन्हीं details से आपका account बनाया जाएगा।</p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div><label class="block text-xs text-gray-300 mb-1">Full Name *</label><input type="text" id="reg-fullname" required placeholder="अपना पूरा नाम" class="input-field"></div>
+          <div><label class="block text-xs text-gray-300 mb-1">Email Address *</label><input type="email" id="reg-email" required placeholder="name@example.com" class="input-field"></div>
+          <div><label class="block text-xs text-gray-300 mb-1">10-digit WhatsApp No. *</label><input type="tel" id="reg-whatsapp" maxlength="10" minlength="10" required placeholder="WhatsApp Number" class="input-field"></div>
+          <div><label class="block text-xs text-gray-300 mb-1">Set Password *</label><input type="password" id="reg-password" minlength="6" required placeholder="Set Password" class="input-field"></div>
+        </div>
+        <div><label class="block text-xs text-gray-300 mb-1">Full Address *</label><textarea id="reg-address" rows="2" required placeholder="पूरा पता भरें" class="input-field"></textarea></div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div><label class="block text-xs text-gray-300 mb-1">Sponsor Name</label><input type="text" id="reg-sponsor-name" placeholder="Sponsor Name (optional)" class="input-field"></div>
+          <div><label class="block text-xs text-gray-300 mb-1">Sponsor ID</label><input type="text" id="reg-sponsor-id" placeholder="Sponsor ID (optional)" class="input-field"></div>
+        </div>
+      </div>
+
+      <!-- SECTION 3 -->
+      <div class="border-b border-white/10 pb-6 space-y-2">
+        <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2"><span class="bg-amber-500 text-black w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">3</span> Withdrawal / Payment Receiving Details</h3>
+        <p class="text-xs text-amber-300/80 bg-amber-500/10 p-2 rounded border border-amber-500/20">Income प्राप्त करने के लिए अपना valid payment address दें। केवल अपना स्वयं का valid UPI ID / bank receiving details दें।</p>
+        <div><label class="block text-xs text-gray-300 mb-1">Your Withdrawal UPI ID / Bank Details *</label><input type="text" id="reg-user-upi" required placeholder="e.g. yourname@upi / Bank Account & IFSC" class="input-field font-mono"></div>
+      </div>
+
+      <!-- SECTION 4 -->
+      <div class="border-b border-white/10 pb-6 space-y-4">
+        <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2"><span class="bg-amber-500 text-black w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">4</span> IOIS Payment</h3>
+        <div class="bg-gray-950 p-4 rounded-2xl border border-amber-500/30 text-center space-y-3">
+          <div class="flex justify-between text-xs text-gray-300"><span>Selected Membership: <b id="pay-plan-title" class="text-amber-400">Tiranga Silver</b></span><span>Payable Amount: <b id="pay-plan-amount" class="text-emerald-400">₹10</b></span></div>
+          <div class="flex items-center justify-center gap-2 bg-gray-900 py-2 px-4 rounded-xl border border-white/10">
+            <span class="text-xs text-gray-400">IOIS UPI ID:</span>
+            <code class="text-amber-400 font-bold font-mono text-sm">8877490845@spicepay</code>
+            <button type="button" onclick="copyUPI()" class="text-[10px] bg-amber-500 text-black px-2 py-0.5 rounded font-bold ml-2">Copy</button>
+          </div>
+          <div class="flex justify-center py-2">
+            <img id="pay-qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8877490845@spicepay&pn=Vikas%20Kumar&am=10&cu=INR" alt="Official IOIS Payment QR" class="w-36 h-36 rounded-xl border border-white/20">
+          </div>
+          <p class="text-[10px] text-gray-400">Official IOIS Payment QR Code</p>
+        </div>
+      </div>
+
+      <!-- SECTION 5 -->
+      <div class="space-y-4">
+        <h3 class="text-lg font-bold text-amber-400 mb-2 flex items-center gap-2"><span class="bg-amber-500 text-black w-6 h-6 rounded-full inline-flex items-center justify-center text-xs">5</span> Payment Verification Documents</h3>
+        <div><label class="block text-xs text-gray-300 mb-1">Payment Screenshot *</label><input type="file" id="file-screenshot" required accept="image/*" class="input-field"></div>
+        <div><label class="block text-xs text-gray-300 mb-1">Payment Address Proof * (UPI QR / Passbook Screenshot)</label><input type="file" id="file-address-proof" required class="input-field"></div>
+        
+        <div class="flex items-start gap-2 pt-2">
+          <input type="checkbox" id="reg-confirm" required class="mt-1">
+          <label for="reg-confirm" class="text-xs text-gray-300">मैं पुष्टि करता/करती हूँ कि मैंने अपनी जानकारी सही दी है, selected plan और payment details को समझा है, और गलत जानकारी देने की स्थिति में verification/approval प्रभावित हो सकता है।</label>
+        </div>
+
+        <button type="submit" id="reg-submit-btn" class="btn-gradient w-full py-4 rounded-xl text-base font-black uppercase tracking-wider">
+          CREATE IOIS MEMBER ACCOUNT
+        </button>
+      </div>
+
+    </form>
+    <div class="text-center mt-6 text-xs text-gray-400">Already registered? <a href="javascript:void(0)" onclick="openLoginModal()" class="text-amber-400 font-bold hover:underline">Login here</a></div>
+  </div>
+</div>
+
+<!-- SINGLE PAGE USER DASHBOARD SECTION -->
+<div id="dashboard-content" class="container hidden-section py-8 max-w-5xl mx-auto">
+  <div class="space-y-6">
+    <div class="glass-box p-6 border-amber-500/40 flex flex-wrap justify-between items-center gap-4">
+      <div>
+        <h2 id="dash-user-name" class="text-2xl font-black text-amber-400">User Name</h2>
+        <div class="flex items-center gap-2 mt-1">
+          <span class="text-xs text-gray-400">Unique ID:</span>
+          <span id="dash-user-id" class="text-emerald-400 font-mono font-bold text-sm bg-emerald-500/10 px-2.5 py-0.5 rounded border border-emerald-500/20"></span>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <span id="dash-plan-badge" class="bg-amber-500/20 text-amber-300 text-xs px-3 py-1.5 rounded-full border border-amber-500/30 font-bold"></span>
+        <span id="dash-status-badge" class="bg-amber-500/20 text-amber-300 text-xs px-3 py-1.5 rounded-full border border-amber-500/30 font-bold">Verification Pending</span>
+      </div>
+    </div>
+
+    <!-- LIVE EARNINGS & REFERRAL TRACKER -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+      <div class="glass-box p-4 text-center">
+        <div class="text-xs text-gray-400">Direct Referral Income</div>
+        <div id="dash-earning-bal" class="text-2xl font-black text-emerald-400 mt-1">₹0</div>
+      </div>
+      <div class="glass-box p-4 text-center">
+        <div class="text-xs text-gray-400">Total Joined Members</div>
+        <div class="text-2xl font-black text-amber-400 mt-1">1,248</div>
+      </div>
+      <div class="glass-box p-4 text-center">
+        <div class="text-xs text-gray-400">Silver/Gold Members</div>
+        <div class="text-2xl font-black text-teal-400 mt-1">850</div>
+      </div>
+      <div class="glass-box p-4 text-center">
+        <div class="text-xs text-gray-400">VIP Mastermind</div>
+        <div class="text-2xl font-black text-purple-400 mt-1">108</div>
+      </div>
+    </div>
+
+    <!-- DIGITAL RESOURCES SECTION (ADMIN APPROVAL CONTROLLED) -->
+    <div class="glass-box p-6 border-amber-500/30">
+      <h3 class="text-lg font-bold text-amber-400 mb-2"><i class="fa-solid fa-box-open mr-2"></i>My Digital Kit & Resources</h3>
+      <div id="kit-locked-box" class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-xl text-center">
+        <p class="text-xs text-amber-300">🔒 आपका पेमेंट वेरिफिकेशन अंडर-रिव्यू है। एडमिन द्वारा Telegram पर अप्रूव होते ही आपकी डिजिटल किट अनलॉक कर दी जाएगी।</p>
+      </div>
+      <div id="kit-unlocked-box" class="hidden-section space-y-3">
+        <p class="text-xs text-emerald-400 font-bold">🎉 बधाई हो! आपका अकाउंट अप्रूव हो चुका है। नीचे दिए बटन से अपनी डिजिटल किट डाउनलोड करें:</p>
+        <button onclick="alert('Downloading Digital Assets...')" class="btn-gradient px-6 py-2.5 rounded-xl text-xs font-bold"><i class="fa-solid fa-download mr-1"></i> Download Starter/Pro Digital Assets</button>
+      </div>
+    </div>
+
+    <!-- UNIQUE 3D PROMOTION POSTER & REFERRAL LINK -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="poster-3d p-6 rounded-2xl text-center space-y-4">
+        <span class="bg-amber-500 text-black text-[10px] font-black px-2 py-0.5 rounded uppercase">Official Promotion Banner</span>
+        <h3 class="text-xl font-black tiranga-text">JOIN IOIS PLATFORM TODAY</h3>
+        <p class="text-xs text-gray-300">Earn with Digital Products & Referral Ecosystem. Start with just ₹10!</p>
+        <div class="bg-gray-950/80 p-3 rounded-xl border border-amber-500/30 text-xs font-mono text-amber-400 font-bold">
+          Sponsor ID: <span id="dash-my-sponsor-id"></span>
+        </div>
+        <button onclick="alert('3D Poster Downloaded!')" class="btn-gradient w-full py-2.5 rounded-xl text-xs font-bold"><i class="fa-solid fa-download mr-1"></i> Download 3D Poster</button>
+      </div>
+
+      <div class="glass-box p-6 space-y-4">
+        <h3 class="text-sm font-bold text-gray-200"><i class="fa-solid fa-link text-amber-400 mr-2"></i>Personal Referral Link</h3>
+        <div class="flex gap-2">
+          <input type="text" id="dash-ref-link" readonly class="input-field text-xs font-mono" value="https://ioisplatform.com/?ref=IOIS">
+          <button onclick="copyRefLink()" class="btn-gradient px-4 py-2 rounded-xl text-xs font-bold shrink-0">Copy</button>
+        </div>
+
+        <h3 class="text-sm font-bold text-gray-200 pt-2"><i class="fa-solid fa-cloud-arrow-up text-amber-400 mr-2"></i>Additional Verification Upload</h3>
+        <form onsubmit="handleAdditionalUpload(event)" class="space-y-2">
+          <input type="file" id="dash-extra-file" required class="input-field text-xs">
+          <button type="submit" class="btn-gradient w-full py-2.5 rounded-xl text-xs font-bold">Send Direct To Telegram</button>
         </form>
-        <div id="upload-msg" class="text-xs text-center"></div>
       </div>
     </div>
   </div>
-
+</div>
 </main>
 
-<!-- REGISTRATION MODAL -->
-<div id="register-modal" class="modal-overlay hidden-section">
-  <div class="glass w-full max-w-md rounded-3xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto">
-    <button onclick="closeModal('register-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    
-    <h2 class="text-2xl font-black text-center mb-1">IOIS Registration</h2>
-    <p class="text-xs text-gray-400 text-center mb-6">Member बनने के लिए अपना प्लान और डिटेल्स भरें</p>
-
-    <form id="reg-form" onsubmit="handleRegistration(event)" class="space-y-4">
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Select Membership Plan *</label>
-        <select id="reg-plan" onchange="updateQRAmount()" required class="input-box rounded-xl py-3 px-4 text-sm bg-gray-900">
-          <option value="10">Plan ₹10 (Starter)</option>
-          <option value="49">Plan ₹49 (Basic)</option>
-          <option value="99" selected>Plan ₹99 (Standard)</option>
-          <option value="199">Plan ₹199 (Advanced)</option>
-          <option value="399">Plan ₹399 (Pro)</option>
-          <option value="699">Plan ₹699 (Elite)</option>
-          <option value="999">Plan ₹999 (Master)</option>
-        </select>
-      </div>
-
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Full Name *</label>
-        <input type="text" id="reg-name" placeholder="अपना पूरा नाम" required class="input-box rounded-xl py-3 px-4 text-sm">
-      </div>
-
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">WhatsApp Number *</label>
-        <input type="tel" id="reg-phone" maxlength="10" minlength="10" placeholder="10-digit WhatsApp number" required class="input-box rounded-xl py-3 px-4 text-sm">
-      </div>
-
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Password *</label>
-        <input type="password" id="reg-pass" minlength="6" placeholder="Create password" required class="input-box rounded-xl py-3 px-4 text-sm">
-      </div>
-
-      <!-- UPI PAYMENT DISPLAY -->
-      <div class="bg-gray-950/90 p-4 rounded-xl border border-amber-500/30 text-center space-y-2">
-        <div class="text-xs text-amber-400 font-bold">Official Payment Details</div>
-        <div class="text-gray-300 text-xs">Vikas Kumar</div>
-        <div class="text-amber-400 font-mono text-sm font-bold bg-amber-500/10 py-1.5 rounded border border-amber-500/20">8877490845@spicepay</div>
-        
-        <div class="py-2 flex justify-center">
-          <img id="upi-qr" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8877490845@spicepay&pn=Vikas%20Kumar&am=99&cu=INR" alt="UPI QR Code" class="w-32 h-32 rounded-lg border border-white/20">
-        </div>
-        <p class="text-[10px] text-gray-400">QR कोड स्कैन करके पेमेंट करें और नीचे UTR दर्ज करें</p>
-      </div>
-
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Payment UTR / Ref No. *</label>
-        <input type="text" id="reg-utr" placeholder="12 digit UTR number" required class="input-box rounded-xl py-3 px-4 text-sm">
-      </div>
-
-      <button type="submit" id="reg-btn" class="btn-gradient w-full py-3.5 rounded-xl text-sm font-bold">
-        Submit & Generate Unique User ID
-      </button>
-    </form>
-    
-    <p class="text-xs text-center text-gray-400 mt-4">
-      पहिले से अकाउंट है? <a href="#" onclick="switchModal('register-modal', 'login-modal')" class="text-amber-400 hover:underline">लॉगिन करें</a>
-    </p>
-  </div>
-</div>
-
 <!-- LOGIN MODAL -->
-<div id="login-modal" class="modal-overlay hidden-section">
-  <div class="glass w-full max-w-md rounded-3xl p-6 sm:p-8 relative">
-    <button onclick="closeModal('login-modal')" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
-    
-    <h2 class="text-2xl font-black text-center mb-1">IOIS Member Login</h2>
-    <p class="text-xs text-gray-400 text-center mb-6">अपनी Unique User ID और Password दर्ज करें</p>
-
-    <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Unique User ID *</label>
-        <input type="text" id="login-id" placeholder="e.g. IOIS99RK015" required class="input-box rounded-xl py-3 px-4 text-sm font-mono">
-      </div>
-
-      <div>
-        <label class="block text-xs text-amber-400 font-bold mb-1">Password *</label>
-        <input type="password" id="login-pass" placeholder="Enter password" required class="input-box rounded-xl py-3 px-4 text-sm">
-      </div>
-
-      <button type="submit" class="btn-gradient w-full py-3.5 rounded-xl text-sm font-bold">
-        Login To Dashboard
-      </button>
+<div id="login-modal-overlay" class="modal-overlay hidden-section">
+  <div class="glass-box w-full max-w-md p-6 sm:p-8 relative">
+    <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">×</button>
+    <h2 class="text-2xl font-black text-center text-amber-400 mb-1">IOIS Member Login</h2>
+    <p class="text-xs text-gray-400 text-center mb-4">अपनी Unique User ID और Password दर्ज करें</p>
+    <form onsubmit="handleLoginSubmit(event)" class="space-y-4">
+      <div><label class="block text-xs text-gray-300 mb-1">Unique User ID *</label><input type="text" id="login-userid" placeholder="e.g. IOIS99RK015" required class="input-field font-mono"></div>
+      <div><label class="block text-xs text-gray-300 mb-1">Password *</label><input type="password" id="login-password" placeholder="Password" required class="input-field"></div>
+      <button type="submit" class="btn-gradient w-full py-3 rounded-xl text-sm font-bold">Login To Dashboard</button>
     </form>
-
-    <p class="text-xs text-center text-gray-400 mt-4">
-      अकाउंट नहीं है? <a href="#" onclick="switchModal('login-modal', 'register-modal')" class="text-amber-400 hover:underline">रजिस्टर करें</a>
-    </p>
+    
+    <div class="flex justify-between text-[11px] text-amber-400 mt-4 font-bold">
+      <a href="javascript:void(0)" onclick="openForgotUserIDModal()">Forgot User ID?</a>
+      <a href="javascript:void(0)" onclick="openResetPasswordModal()">Reset Password?</a>
+    </div>
   </div>
 </div>
 
-<!-- SINGLE PAGE JAVASCRIPT SYSTEM -->
+<!-- FORGOT USER ID MODAL -->
+<div id="forgot-id-modal-overlay" class="modal-overlay hidden-section">
+  <div class="glass-box w-full max-w-md p-6 relative">
+    <button onclick="closeForgotModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">×</button>
+    <h3 class="text-xl font-bold text-amber-400 mb-2">Find Forgotten User ID</h3>
+    <form onsubmit="handleFindUserID(event)" class="space-y-3">
+      <input type="email" id="find-email" placeholder="Registered Email Address" required class="input-field text-xs">
+      <input type="tel" id="find-phone" maxlength="10" placeholder="10-digit WhatsApp Number" required class="input-field text-xs">
+      <button type="submit" class="btn-gradient w-full py-2.5 rounded-xl text-xs font-bold">Get User ID Immediately</button>
+    </form>
+    <div id="find-id-result" class="mt-3 text-xs text-center font-bold font-mono"></div>
+  </div>
+</div>
+
+<!-- RESET PASSWORD MODAL -->
+<div id="reset-pass-modal-overlay" class="modal-overlay hidden-section">
+  <div class="glass-box w-full max-w-md p-6 relative">
+    <button onclick="closeResetModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl">×</button>
+    <h3 class="text-xl font-bold text-amber-400 mb-2">Instant Password Reset</h3>
+    <form onsubmit="handleResetPassword(event)" class="space-y-3">
+      <input type="text" id="reset-userid" placeholder="User ID (e.g. IOIS99RK015)" required class="input-field text-xs font-mono">
+      <input type="email" id="reset-email" placeholder="Registered Email Address" required class="input-field text-xs">
+      <input type="tel" id="reset-phone" maxlength="10" placeholder="WhatsApp Number" required class="input-field text-xs">
+      <input type="password" id="reset-oldpass" placeholder="Old Password" required class="input-field text-xs">
+      <input type="password" id="reset-newpass" minlength="6" placeholder="New Password" required class="input-field text-xs">
+      <button type="submit" class="btn-gradient w-full py-2.5 rounded-xl text-xs font-bold">Set New Password</button>
+    </form>
+  </div>
+</div>
+
+<!-- SUCCESS POPUP MODAL -->
+<div id="success-popup-overlay" class="modal-overlay hidden-section">
+  <div class="glass-box w-full max-w-md p-6 sm:p-8 text-center space-y-4 border-2 border-emerald-500">
+    <div class="text-4xl">🎉</div>
+    <h2 class="text-2xl font-black text-emerald-400">REGISTRATION SUCCESSFUL!</h2>
+    <p class="text-xs text-gray-300">नमस्ते <b id="succ-name" class="text-white"></b>! आपका IOIS अकाउंट सफलतापूर्वक बन गया है।</p>
+    
+    <div class="bg-gray-950 p-4 rounded-xl border border-emerald-500/40 text-left space-y-2 text-xs">
+      <div class="flex justify-between items-center">
+        <span class="text-gray-400">Unique User ID:</span>
+        <div class="flex items-center gap-1">
+          <code id="succ-userid" class="text-amber-400 font-bold font-mono text-sm"></code>
+          <button onclick="copyGeneratedID()" class="bg-amber-500 text-black px-2 py-0.5 rounded text-[10px] font-bold">Copy</button>
+        </div>
+      </div>
+      <div><span class="text-gray-400">Password:</span> <b id="succ-pass" class="text-white"></b></div>
+      <div><span class="text-gray-400">Selected Plan:</span> <b id="succ-plan" class="text-emerald-400"></b></div>
+    </div>
+
+    <p class="text-[10px] text-amber-300 bg-amber-500/10 p-2 rounded">⚠️ नोट: अपनी User ID और Password को संभाल कर रखें। लॉगिन करने के लिए आपको इस ID की आवश्यकता होगी।</p>
+    
+    <button onclick="proceedToLoginAfterSuccess()" class="btn-gradient w-full py-3 rounded-xl font-bold text-xs uppercase">
+      Dashboard में लॉगिन करें
+    </button>
+  </div>
+</div>
+
+<script src="script.js"></script>
 <script>
-  // YOUR PRE-CONFIGURED BOT & CHANNEL DETAILS
   const TG_CHANNEL_ID = "-1004430484996";
   const TG_BOT_TOKEN = "8838741922:AAFGoIvjohnF8FvEiW84h3SxaX2NeANLC50";
-  const UPI_ID = "8877490845@spicepay";
+  const OFFICIAL_UPI = "8877490845@spicepay";
 
-  // DYNAMIC QR CODE GENERATOR
-  function updateQRAmount() {
-    const plan = document.getElementById('reg-plan').value;
-    const qrImg = document.getElementById('upi-qr');
-    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${UPI_ID}&pn=Vikas%20Kumar&am=${plan}&cu=INR`;
-  }
+  const PLAN_DATA = {
+    "10": { name: "Tiranga Silver", payout: 7 },
+    "49": { name: "Tiranga Gold Pro", payout: 35 },
+    "99": { name: "Tiranga Platinum", payout: 70 },
+    "199": { name: "Tiranga Crystal VIP", payout: 120 },
+    "299": { name: "Govt Exam Pass", payout: 220 },
+    "499": { name: "Tiranga Diamond", payout: 375 },
+    "999": { name: "VIP Mastermind", payout: 750 }
+  };
 
-  // SEQUENCE GENERATOR FOR USER ID (Per Plan)
-  function getNextSequence(plan) {
-    let key = `iois_seq_${plan}`;
-    let current = parseInt(localStorage.getItem(key) || "0") + 1;
-    localStorage.setItem(key, current);
-    return String(current).padStart(3, '0');
-  }
-
-  // GENERATE USER ID: IOIS + Plan + Initials + Sequence (e.g. IOIS99RK015)
-  function generateCustomUserID(plan, fullName) {
-    const words = fullName.trim().split(/\s+/);
-    let initials = "";
-    if (words.length >= 2) {
-      initials = words[0][0] + words[words.length - 1][0];
-    } else if (words.length === 1 && words[0].length > 0) {
-      initials = words[0].substring(0, 2);
-    } else {
-      initials = "XX";
-    }
-    initials = initials.toUpperCase();
-    const seq = getNextSequence(plan);
-    return `IOIS${plan}${initials}${seq}`;
-  }
-
-  // MODAL CONTROLLERS
-  function openModal(id) { document.getElementById(id).classList.remove('hidden-section'); }
-  function closeModal(id) { document.getElementById(id).classList.add('hidden-section'); }
-  function switchModal(fromId, toId) { closeModal(fromId); openModal(toId); }
-
-  // NAVIGATION VIEW CONTROLLER
-  function showHome() {
-    document.getElementById('home-section').classList.remove('hidden-section');
-    document.getElementById('dashboard-section').classList.add('hidden-section');
-  }
-
-  // SEND TELEGRAM MESSAGE TO CHANNEL
-  async function sendTelegramMessage(text) {
-    const url = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`;
+  // OCR SCANNER FOR PAYMENT SCREENSHOT
+  async function scanUTRFromImage(file) {
     try {
-      await fetch(url, {
+      const { data: { text } } = await Tesseract.recognize(file, 'eng');
+      const match = text.match(/\b\d{12}\b/);
+      return match ? match[0] : "OCR Read Pending / Not Detected";
+    } catch(e) { return "OCR Error"; }
+  }
+
+  // SMART TV PLAYLIST CONTROLLER
+  function playCustomPlaylist() {
+    const input = document.getElementById('playlist-url-input').value.trim();
+    const iframe = document.getElementById('tv-iframe');
+    if (!input) return alert('कृपया YouTube Video या Playlist का लिंक पेस्ट करें!');
+
+    let videoId = '', playlistId = '';
+    if (input.includes('list=')) {
+      playlistId = input.split('list=')[1].split('&')[0];
+      iframe.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${playlistId}&autoplay=1&rel=0&modestbranding=1`;
+    } else if (input.includes('v=')) {
+      videoId = input.split('v=')[1].split('&')[0];
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    } else if (input.includes('youtu.be/')) {
+      videoId = input.split('youtu.be/')[1].split('?')[0];
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    } else {
+      alert('अमान्य YouTube लिंक!');
+    }
+  }
+
+  function openChromeBrowser() { window.open('https://www.google.com', '_blank'); }
+  function loadDefaultYouTube() { document.getElementById('tv-iframe').src = "https://www.youtube-nocookie.com/embed/0gYd3mIxksc?autoplay=1&rel=0&modestbranding=1"; }
+
+  function updatePlanDetails() {
+    const amt = document.getElementById('reg-plan-select').value;
+    const plan = PLAN_DATA[amt];
+    document.getElementById('card-plan-name').innerText = plan.name;
+    document.getElementById('card-plan-amt').innerText = '₹' + amt;
+    document.getElementById('card-plan-payout').innerText = '₹' + plan.payout + ' Direct';
+    document.getElementById('pay-plan-title').innerText = plan.name;
+    document.getElementById('pay-plan-amount').innerText = '₹' + amt;
+    document.getElementById('pay-qr-code').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=${OFFICIAL_UPI}&pn=Vikas%20Kumar&am=${amt}&cu=INR`;
+  }
+
+  function copyUPI() { navigator.clipboard.writeText(OFFICIAL_UPI); alert('UPI ID Copied: ' + OFFICIAL_UPI); }
+
+  function generateUserID(plan, fullName) {
+    let key = `iois_seq_${plan}`;
+    let seq = parseInt(localStorage.getItem(key) || "0") + 1;
+    localStorage.setItem(key, seq);
+    let paddedSeq = String(seq).padStart(3, '0');
+
+    const words = fullName.trim().split(/\s+/);
+    let initials = words.length >= 2 ? (words[0][0] + words[words.length - 1][0]) : (words[0].substring(0, 2));
+    return `IOIS${plan}${initials.toUpperCase()}${paddedSeq}`;
+  }
+
+  function openRegistrationFlow() {
+    document.getElementById('home-content').classList.add('hidden-section');
+    document.getElementById('dashboard-content').classList.add('hidden-section');
+    document.getElementById('registration-section').classList.remove('hidden-section');
+    window.scrollTo(0,0);
+  }
+
+  function showHome() {
+    document.getElementById('registration-section').classList.add('hidden-section');
+    document.getElementById('dashboard-content').classList.add('hidden-section');
+    document.getElementById('home-content').classList.remove('hidden-section');
+  }
+
+  function openLoginModal() { document.getElementById('login-modal-overlay').classList.remove('hidden-section'); }
+  function closeLoginModal() { document.getElementById('login-modal-overlay').classList.add('hidden-section'); }
+
+  function openForgotUserIDModal() { closeLoginModal(); document.getElementById('forgot-id-modal-overlay').classList.remove('hidden-section'); }
+  function closeForgotModal() { document.getElementById('forgot-id-modal-overlay').classList.add('hidden-section'); }
+
+  function openResetPasswordModal() { closeLoginModal(); document.getElementById('reset-pass-modal-overlay').classList.remove('hidden-section'); }
+  function closeResetModal() { document.getElementById('reset-pass-modal-overlay').classList.add('hidden-section'); }
+
+  // RECOVERY HANDLERS
+  function handleFindUserID(e) {
+    e.preventDefault();
+    const email = document.getElementById('find-email').value.trim();
+    const phone = document.getElementById('find-phone').value.trim();
+    const resultBox = document.getElementById('find-id-result');
+
+    for (let i = 0; i < localStorage.length; i++) {
+      let key = localStorage.key(i);
+      if (key.startsWith("user_")) {
+        let user = JSON.parse(localStorage.getItem(key));
+        if (user.email === email && user.phone === phone) {
+          resultBox.className = "mt-3 text-xs text-center font-bold text-emerald-400";
+          resultBox.innerText = `🎉 Your User ID is: ${user.userID}`;
+          return;
+        }
+      }
+    }
+    resultBox.className = "mt-3 text-xs text-center font-bold text-red-400";
+    resultBox.innerText = "❌ No matching records found!";
+  }
+
+  function handleResetPassword(e) {
+    e.preventDefault();
+    const userId = document.getElementById('reset-userid').value.trim();
+    const email = document.getElementById('reset-email').value.trim();
+    const phone = document.getElementById('reset-phone').value.trim();
+    const oldpass = document.getElementById('reset-oldpass').value;
+    const newpass = document.getElementById('reset-newpass').value;
+
+    const stored = localStorage.getItem(`user_${userId}`);
+    if (!stored) return alert("Invalid User ID!");
+
+    let user = JSON.parse(stored);
+    if (user.email === email && user.phone === phone && user.pass === oldpass) {
+      user.pass = newpass;
+      localStorage.setItem(`user_${userId}`, JSON.stringify(user));
+      alert("✅ Password updated successfully! Please login with your new password.");
+      closeResetModal();
+      openLoginModal();
+    } else {
+      alert("❌ Authentication Failed! Provided details do not match.");
+    }
+  }
+
+  // SUBMIT REGISTRATION
+  async function handleRegistrationSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('reg-submit-btn');
+    btn.disabled = true; btn.innerText = "Scanning OCR & Processing...";
+
+    const planAmt = document.getElementById('reg-plan-select').value;
+    const planInfo = PLAN_DATA[planAmt];
+    const name = document.getElementById('reg-fullname').value;
+    const email = document.getElementById('reg-email').value;
+    const phone = document.getElementById('reg-whatsapp').value;
+    const pass = document.getElementById('reg-password').value;
+    const address = document.getElementById('reg-address').value;
+    const sponsorName = document.getElementById('reg-sponsor-name').value || "None";
+    const sponsorId = document.getElementById('reg-sponsor-id').value || "None";
+    const userUpi = document.getElementById('reg-user-upi').value;
+
+    const screenshotFile = document.getElementById('file-screenshot').files[0];
+    const scannedUTR = screenshotFile ? await scanUTRFromImage(screenshotFile) : "Not Uploaded";
+
+    const generatedID = generateUserID(planAmt, name);
+
+    // SAVE USER
+    const userData = { userID: generatedID, name, email, phone, pass, address, sponsorName, sponsorId, userUpi, planAmt, planName: planInfo.name, isApproved: false, sessionToken: "", earnings: 0 };
+    localStorage.setItem(`user_${generatedID}`, JSON.stringify(userData));
+
+    // CREDIT SPONSOR EARNINGS & NOTIFY SPONSOR
+    if (sponsorId !== "None" && localStorage.getItem(`user_${sponsorId}`)) {
+      let sponsor = JSON.parse(localStorage.getItem(`user_${sponsorId}`));
+      sponsor.earnings = (sponsor.earnings || 0) + planInfo.payout;
+      localStorage.setItem(`user_${sponsorId}`, JSON.stringify(sponsor));
+
+      const sponsorAlert = `🔔 *REFERRAL COMMISSION ALERT*\n\n` +
+                           `👤 *Sponsor:* ${sponsor.name} (\`${sponsor.userID}\`)\n` +
+                           `🎉 *New Referral:* ${name} (\`${generatedID}\`)\n` +
+                           `💳 *Plan Joined:* ${planInfo.name} (₹${planAmt})\n` +
+                           `💰 *Commission Earned:* ₹${planInfo.payout}`;
+      await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ chat_id: TG_CHANNEL_ID, text: sponsorAlert, parse_mode: "Markdown" }) });
+    }
+
+    // TELEGRAM CHANNEL MESSAGE
+    const alertMsg = `🚀 *NEW IOIS MEMBER REGISTRATION*\n\n` +
+                     `📋 *MEMBER DETAILS:*\n` +
+                     `🆔 *User ID:* \`${generatedID}\`\n` +
+                     `👤 *Full Name:* ${name}\n` +
+                     `📧 *Email:* ${email}\n` +
+                     `📱 *WhatsApp:* ${phone}\n` +
+                     `📍 *Address:* ${address}\n` +
+                     `🔑 *Password:* ${pass}\n\n` +
+                     `🤝 *SPONSOR DETAILS:*\n` +
+                     `👤 *Sponsor Name:* ${sponsorName}\n` +
+                     `🆔 *Sponsor ID:* ${sponsorId}\n\n` +
+                     `💳 *MEMBERSHIP PLAN:*\n` +
+                     `📦 *Selected Plan:* ${planInfo.name} (₹${planAmt})\n` +
+                     `💰 *Direct Payout:* ₹${planInfo.payout}\n\n` +
+                     `🔍 *OCR SCANNED UTR:* \`${scannedUTR}\`\n\n` +
+                     `🏦 *WITHDRAWAL DETAILS:*\n` +
+                     `💸 *User UPI/Bank:* \`${userUpi}\``;
+
+    try {
+      await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: TG_CHANNEL_ID, text: text, parse_mode: "Markdown" })
+        body: JSON.stringify({ chat_id: TG_CHANNEL_ID, text: alertMsg, parse_mode: "Markdown" })
       });
-    } catch(err) { console.error("Telegram alert error:", err); }
+
+      if (screenshotFile) {
+        const formData = new FormData();
+        formData.append("chat_id", TG_CHANNEL_ID);
+        formData.append("document", screenshotFile);
+        formData.append("caption", `🧾 *Payment Screenshot Proof*\n🆔 *User ID:* \`${generatedID}\` | 👤 *Name:* ${name}`);
+        await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendDocument`, { method: "POST", body: formData });
+      }
+
+      const addressProofFile = document.getElementById('file-address-proof').files[0];
+      if (addressProofFile) {
+        const formData = new FormData();
+        formData.append("chat_id", TG_CHANNEL_ID);
+        formData.append("document", addressProofFile);
+        formData.append("caption", `📄 *Payment Address Proof*\n🆔 *User ID:* \`${generatedID}\` | 👤 *Name:* ${name}`);
+        await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendDocument`, { method: "POST", body: formData });
+      }
+    } catch (err) { console.error("Telegram Upload Error:", err); }
+
+    document.getElementById('succ-name').innerText = name;
+    document.getElementById('succ-userid').innerText = generatedID;
+    document.getElementById('succ-pass').innerText = pass;
+    document.getElementById('succ-plan').innerText = `${planInfo.name} (₹${planAmt})`;
+
+    document.getElementById('success-popup-overlay').classList.remove('hidden-section');
+    btn.disabled = false; btn.innerText = "CREATE IOIS MEMBER ACCOUNT";
   }
 
-  // REGISTRATION HANDLER
-  async function handleRegistration(e) {
-    e.preventDefault();
-    const btn = document.getElementById('reg-btn');
-    btn.disabled = true;
-    btn.innerText = "Generating User ID...";
-
-    const plan = document.getElementById('reg-plan').value;
-    const name = document.getElementById('reg-name').value;
-    const phone = document.getElementById('reg-phone').value;
-    const pass = document.getElementById('reg-pass').value;
-    const utr = document.getElementById('reg-utr').value;
-
-    const userId = generateCustomUserID(plan, name);
-
-    // SAVE USER IN LOCAL SESSION
-    const userData = { userId, name, phone, pass, plan, utr };
-    localStorage.setItem(`user_${userId}`, JSON.stringify(userData));
-
-    // SEND NOTIFICATION TO TELEGRAM
-    const msg = `🚀 *New Registration Alert*\n\n` +
-                `👤 *Name:* ${name}\n` +
-                `🆔 *Assigned User ID:* \`${userId}\`\n` +
-                `📱 *WhatsApp:* ${phone}\n` +
-                `💳 *Plan:* ₹${plan}\n` +
-                `🧾 *UTR/Ref No:* \`${utr}\`\n` +
-                `🔑 *Password:* ${pass}`;
-
-    await sendTelegramMessage(msg);
-
-    alert(`Registration Successful!\nYour Unique User ID: ${userId}\nPlease save this ID for login.`);
-    closeModal('register-modal');
-    btn.disabled = false;
-    btn.innerText = "Submit & Generate Unique User ID";
-
-    document.getElementById('login-id').value = userId;
-    openModal('login-modal');
+  function copyGeneratedID() {
+    const id = document.getElementById('succ-userid').innerText;
+    navigator.clipboard.writeText(id);
+    alert('User ID Copied: ' + id);
   }
 
-  // LOGIN HANDLER
-  function handleLogin(e) {
+  function proceedToLoginAfterSuccess() {
+    const id = document.getElementById('succ-userid').innerText;
+    document.getElementById('success-popup-overlay').classList.add('hidden-section');
+    document.getElementById('registration-section').classList.add('hidden-section');
+    document.getElementById('login-userid').value = id;
+    openLoginModal();
+  }
+
+  // SINGLE DEVICE SESSION LOGIN HANDLER
+  function handleLoginSubmit(e) {
     e.preventDefault();
-    const id = document.getElementById('login-id').value.trim();
-    const pass = document.getElementById('login-pass').value;
+    const userId = document.getElementById('login-userid').value.trim();
+    const pass = document.getElementById('login-password').value;
 
-    const savedData = localStorage.getItem(`user_${id}`);
-    if (!savedData) {
-      alert("Invalid User ID or Password!");
-      return;
-    }
+    const stored = localStorage.getItem(`user_${userId}`);
+    if (!stored) return alert("Invalid User ID or Password!");
 
-    const user = JSON.parse(savedData);
+    let user = JSON.parse(stored);
     if (user.pass === pass) {
-      sessionStorage.setItem("active_user", JSON.stringify(user));
-      closeModal('login-modal');
-      loadDashboard(user);
+      const activeToken = "token_" + Math.random().toString(36).substring(2);
+      user.sessionToken = activeToken;
+      localStorage.setItem(`user_${userId}`, JSON.stringify(user));
+
+      sessionStorage.setItem("active_iois_user", JSON.stringify(user));
+      sessionStorage.setItem("iois_session_token", activeToken);
+
+      closeLoginModal();
+      loadUserDashboard(user);
     } else {
       alert("Invalid Password!");
     }
   }
 
-  // LOAD DASHBOARD
-  function loadDashboard(user) {
-    document.getElementById('nav-guest').classList.add('hidden');
-    document.getElementById('nav-user').classList.remove('hidden');
-    document.getElementById('nav-user-id').innerText = user.userId;
+  function loadUserDashboard(user) {
+    document.getElementById('guest-actions').classList.add('hidden-section');
+    document.getElementById('user-actions').classList.remove('hidden-section');
+    document.getElementById('nav-user-id').innerText = user.userID;
 
-    document.getElementById('dash-name').innerText = user.name;
-    document.getElementById('dash-userid').innerText = user.userId;
+    document.getElementById('dash-user-name').innerText = user.name;
+    document.getElementById('dash-user-id').innerText = user.userID;
+    document.getElementById('dash-plan-badge').innerText = user.planName;
+    document.getElementById('dash-earning-bal').innerText = '₹' + (user.earnings || 0);
+    document.getElementById('dash-my-sponsor-id').innerText = user.userID;
+    document.getElementById('dash-ref-link').value = `https://ioisplatform.com/?ref=${user.userID}`;
 
-    document.getElementById('home-section').classList.add('hidden-section');
-    document.getElementById('dashboard-section').classList.remove('hidden-section');
+    if (user.isApproved) {
+      document.getElementById('dash-status-badge').innerText = "Active & Approved";
+      document.getElementById('dash-status-badge').className = "bg-emerald-500/20 text-emerald-300 text-xs px-3 py-1.5 rounded-full border border-emerald-500/30 font-bold";
+      document.getElementById('kit-locked-box').classList.add('hidden-section');
+      document.getElementById('kit-unlocked-box').classList.remove('hidden-section');
+    } else {
+      document.getElementById('dash-status-badge').innerText = "Verification Pending";
+      document.getElementById('kit-locked-box').classList.remove('hidden-section');
+      document.getElementById('kit-unlocked-box').classList.add('hidden-section');
+    }
+
+    document.getElementById('home-content').classList.add('hidden-section');
+    document.getElementById('registration-section').classList.add('hidden-section');
+    document.getElementById('dashboard-content').classList.remove('hidden-section');
   }
 
-  // LOGOUT
+  function copyRefLink() {
+    const link = document.getElementById('dash-ref-link').value;
+    navigator.clipboard.writeText(link);
+    alert('Referral Link Copied!');
+  }
+
   function logoutUser() {
-    sessionStorage.removeItem("active_user");
-    document.getElementById('nav-guest').classList.remove('hidden');
-    document.getElementById('nav-user').classList.add('hidden');
+    sessionStorage.removeItem("active_iois_user");
+    sessionStorage.removeItem("iois_session_token");
+    document.getElementById('guest-actions').classList.remove('hidden-section');
+    document.getElementById('user-actions').classList.add('hidden-section');
     showHome();
   }
 
-  // FILE UPLOAD TO TELEGRAM CHANNEL
-  async function handleFileUpload(e) {
+  async function handleAdditionalUpload(e) {
     e.preventDefault();
-    const btn = document.getElementById('upload-btn');
-    const msgBox = document.getElementById('upload-msg');
-    const fileInput = document.getElementById('upload-file');
+    const file = document.getElementById('dash-extra-file').files[0];
+    if (!file) return;
 
-    if (!fileInput.files[0]) return;
-
-    btn.disabled = true;
-    msgBox.innerHTML = "<span class='text-amber-400'>Uploading file...</span>";
-
-    const user = JSON.parse(sessionStorage.getItem("active_user"));
+    const activeUser = JSON.parse(sessionStorage.getItem("active_iois_user"));
     const formData = new FormData();
     formData.append("chat_id", TG_CHANNEL_ID);
-    formData.append("document", fileInput.files[0]);
-    formData.append("caption", `📄 *Verification Document Uploaded*\n\n👤 *Name:* ${user.name}\n🆔 *User ID:* \`${user.userId}\`\n📱 *WhatsApp:* ${user.phone}`);
+    formData.append("document", file);
+    formData.append("caption", `📄 *Additional Verification Document*\n🆔 *User ID:* \`${activeUser.userID}\` | 👤 *Name:* ${activeUser.name}`);
 
     try {
-      const res = await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendDocument`, {
-        method: "POST",
-        body: formData
-      });
-      if (res.ok) {
-        msgBox.innerHTML = "<span class='text-teal-400 font-bold'>Document Uploaded Successfully! Admin will verify soon.</span>";
-        fileInput.value = "";
-      } else {
-        msgBox.innerHTML = "<span class='text-red-400'>Upload failed. Please try again.</span>";
-      }
-    } catch (err) {
-      msgBox.innerHTML = "<span class='text-red-400'>Server Connection Error.</span>";
-    }
-    btn.disabled = false;
+      await fetch(`https://api.telegram.org/bot${TG_BOT_TOKEN}/sendDocument`, { method: "POST", body: formData });
+      alert("Document Sent Direct to Telegram!");
+      document.getElementById('dash-extra-file').value = "";
+    } catch(err) { alert("Upload Failed!"); }
   }
 
-  // CHECK ACTIVE SESSION ON LOAD
+  // SINGLE ACTIVE SESSION CHECK
   window.addEventListener('DOMContentLoaded', () => {
-    const active = sessionStorage.getItem("active_user");
-    if (active) {
-      loadDashboard(JSON.parse(active));
+    const active = sessionStorage.getItem("active_iois_user");
+    const currentToken = sessionStorage.getItem("iois_session_token");
+
+    if (active && currentToken) {
+      let user = JSON.parse(active);
+      let latestUserObj = JSON.parse(localStorage.getItem(`user_${user.userID}`));
+
+      if (latestUserObj && latestUserObj.sessionToken !== currentToken) {
+        alert("⚠️ You have been logged out because your account was logged in on another device.");
+        logoutUser();
+      } else {
+        loadUserDashboard(latestUserObj);
+      }
     }
   });
 </script>
-
 </body>
 </html>
