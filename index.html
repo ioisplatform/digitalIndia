@@ -1,516 +1,469 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="hi" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23020617' stroke='%23f59e0b' stroke-width='4'/><text x='50' y='58' font-size='26' font-weight='900' fill='%23fbbf24' text-anchor='middle' font-family='sans-serif'>IOIS</text></svg>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#030712">
 <title>IOIS PLATFORM | Indian Online Income Supporting System</title>
+<meta name="description" content="Indian Online Income Supporting System - Smart Digital Portal with 7 Plans, Assessment, Interview Questions & Answers, Controlled Live Ticker & AI Assistant">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Orbitron:wght@600;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['"Plus Jakarta Sans"','"Noto Sans Devanagari"','sans-serif'],mono:['"Orbitron"','monospace']}}}};
+</script>
 <style>
-  :root {
-    --bg-dark: #020617;
-    --card-bg: rgba(15, 23, 42, 0.9);
-    --saffron: #FF9933;
-    --green: #138808;
-    --gold: #D4AF37;
-    --gold-light: #F3E5AB;
-    --border-glow: rgba(212, 175, 55, 0.5);
-  }
-
-  body {
-    background-color: var(--bg-dark);
-    color: #f8fafc;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background-image: 
-      radial-gradient(circle at 50% 0%, rgba(255, 153, 51, 0.15), transparent 45%),
-      radial-gradient(circle at 100% 100%, rgba(19, 136, 8, 0.1), transparent 45%);
-    background-size: 100% 100%;
-    overflow-x: hidden;
-  }
-
-  /* PREMIUM TEXT EFFECTS */
-  .gold-metallic-text {
-    background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 950;
-  }
-  .tiranga-text {
-    background: linear-gradient(90deg, var(--saffron) 0%, #FFFFFF 50%, var(--green) 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900;
-  }
-  .glass-card-premium {
-    background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 24px;
-    padding: 2.5rem; backdrop-filter: blur(25px); box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.9);
-    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* TIRANGA TICKER - DETAILED ANALYSIS */
-  .ticker-container {
-    background: #000; border-bottom: 2px solid var(--gold); padding: 15px 0; overflow: hidden;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .ticker-content {
-    display: inline-block; white-space: nowrap; animation: ticker-scroll 50s linear infinite;
-  }
-  @keyframes ticker-scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-  
-  .ticker-item {
-    display: inline-flex; align-items: center; padding: 0 70px; font-weight: 900; font-size: 15px;
-    background: linear-gradient(90deg, #FF9933, #fff, #138808); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .ticker-join-btn {
-    background: var(--green); color: #fff !important; -webkit-text-fill-color: white !important;
-    padding: 3px 18px; border-radius: 50px; font-size: 11px; border: 1px solid #fff; margin-left: 15px;
-    text-decoration: none; font-weight: 900; box-shadow: 0 0 15px rgba(19, 136, 8, 0.6);
-  }
-
-  /* CLOCK SYSTEM - PERFECTLY STRAIGHT NUMBERS */
-  .clock-outer {
-    position: relative; width: 150px; height: 140px; border: 5px solid var(--gold); border-radius: 50%;
-    background: radial-gradient(circle, #0f172a 0%, #030712 100%); margin: 0 auto; box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
-  }
-  .clock-num span {
-    position: absolute; width: 26px; height: 26px; left: calc(50% - 13px); top: calc(50% - 13px);
-    display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 1000;
-    color: var(--gold-light); --radius: 56px;
-  }
-  .n1  { transform: rotate(30deg)  translateY(calc(-1 * var(--radius))) rotate(-30deg); }
-  .n2  { transform: rotate(60deg)  translateY(calc(-1 * var(--radius))) rotate(-60deg); }
-  .n3  { transform: rotate(90deg)  translateY(calc(-1 * var(--radius))) rotate(-90deg); }
-  .n4  { transform: rotate(120deg) translateY(calc(-1 * var(--radius))) rotate(-120deg); }
-  .n5  { transform: rotate(150deg) translateY(calc(-1 * var(--radius))) rotate(-150deg); }
-  .n6  { transform: rotate(180deg) translateY(calc(-1 * var(--radius))) rotate(-180deg); }
-  .n7  { transform: rotate(210deg) translateY(calc(-1 * var(--radius))) rotate(-210deg); }
-  .n8  { transform: rotate(240deg) translateY(calc(-1 * var(--radius))) rotate(-240deg); }
-  .n9  { transform: rotate(270deg) translateY(calc(-1 * var(--radius))) rotate(-270deg); }
-  .n10 { transform: rotate(300deg) translateY(calc(-1 * var(--radius))) rotate(-300deg); }
-  .n11 { transform: rotate(330deg) translateY(calc(-1 * var(--radius))) rotate(-330deg); }
-  .n12 { transform: rotate(0deg)   translateY(calc(-1 * var(--radius))) rotate(0deg); }
-
-  .hand { position: absolute; bottom: 50%; left: 50%; transform-origin: bottom center; border-radius: 10px; z-index: 10; }
-  .h-hand { width: 5px; height: 35px; background: var(--gold); }
-  .m-hand { width: 4px; height: 50px; background: #fff; }
-  .s-hand { width: 2px; height: 60px; background: var(--saffron); }
-
-  /* INTERVIEW SYSTEM */
-  .step { display: none; }
-  .step.active { display: block; animation: zoomIn 0.5s ease; }
-  @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-  .opt-btn {
-    width: 100%; text-align: left; padding: 22px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(15, 23, 42, 0.8); color: #fff; transition: 0.3s; margin-bottom: 15px; font-weight: 800; font-size: 16px;
-  }
-  .opt-btn:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.2); transform: translateX(12px); }
-
-  .btn-premium {
-    background: linear-gradient(135deg, #FF9933 0%, #D4AF37 50%, #138808 100%);
-    color: #000; font-weight: 900; padding: 18px 40px; border-radius: 100px;
-    display: inline-flex; align-items: center; gap: 12px; text-transform: uppercase; text-decoration: none;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5); transition: 0.4s;
-  }
-  .btn-premium:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 45px rgba(212, 175, 55, 0.8); }
-
-  .story-box { border-left: 6px solid var(--gold); background: rgba(255, 255, 255, 0.03); padding: 20px; border-radius: 0 20px 20px 0; margin-top: 20px; font-style: italic; }
-  .instant-label { background: rgba(34, 197, 94, 0.15); color: #4ade80; padding: 8px 15px; border-radius: 10px; font-weight: 900; display: inline-block; margin: 10px 0; border: 1px solid #138808; }
+body{background:#020617;color:#f1f5f9;font-family:'Plus Jakarta Sans','Noto Sans Devanagari',sans-serif;overflow-x:hidden}
+.glass-card{background:rgba(15,23,42,.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.08)}
+.glass-card-gold{background:linear-gradient(135deg,rgba(30,27,75,.4),rgba(15,23,42,.85));border:1px solid rgba(245,158,11,.35);box-shadow:0 10px 30px -10px rgba(245,158,11,.15)}
+.gold-text{background:linear-gradient(135deg,#fef08a 0%,#f59e0b 50%,#d97706 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tiranga-text{background:linear-gradient(90deg,#ff9933 0%,#fff 50%,#138808 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+@keyframes marquee{0%{transform:translateX(0%)}100%{transform:translateX(-50%)}}
+.animate-ticker{display:inline-flex;white-space:nowrap;animation:marquee 25s linear infinite}
+.animate-ticker.slow{animation-duration:45s}.animate-ticker.normal{animation-duration:25s}.animate-ticker.fast{animation-duration:12s}.animate-ticker.paused{animation-play-state:paused}
+.chat-user{background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.35);margin-left:2rem}
+.chat-ai{background:rgba(15,23,42,.92);border:1px solid rgba(51,65,85,.8);margin-right:2rem}
+.interview-option{transition:.2s}.interview-option:hover{transform:translateY(-1px);border-color:rgba(245,158,11,.65);background:rgba(245,158,11,.08)}
+.interview-option.selected{border-color:#f59e0b;background:rgba(245,158,11,.14);box-shadow:0 0 0 1px rgba(245,158,11,.25)}
+.legal-card{background:linear-gradient(145deg,rgba(15,23,42,.92),rgba(2,6,23,.96));border:1px solid rgba(245,158,11,.2)}
+#chat-messages{scroll-behavior:smooth}
+::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:#020617}::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}::-webkit-scrollbar-thumb:hover{background:#f59e0b}
 </style>
 </head>
-<body class="antialiased">
+<body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
 
-<!-- 1. TIRANGA NEWS TICKER - FULL ANALYSIS -->
-<div class="ticker-container">
-  <div class="ticker-content">
-    <span class="ticker-item">P01: BAL VIKAS ACCESS (₹10) - NCERT 1-5 PDFs + Entry Pass ➔ ₹7 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P02: YOUTH SKILL ACCESS (₹49) - Resume Templates + AI Tools ➔ ₹34 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P03: CAREER & JOB ACCESS (₹99) - Class 6-12 Mastery + Prep ➔ ₹64 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P04: FAMILY VIP ACCESS (₹199) - Safety Console + Lifestyle ➔ ₹119 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P05: STUDENT ELITE ACCESS (₹299) - Competitive Exam Pro ➔ ₹179 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P06: AGENCY RESELLER HUB (₹499) - Reselling Rights + Automation ➔ ₹274 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
-    <span class="ticker-item">P07: MASTER LIFETIME ACCESS (₹999) - All 6 Plans + Full Legacy ➔ ₹499 INSTANT PAYOUT RECEIVED <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="ticker-join-btn">JOIN NOW</a></span>
+<!-- HEADER & NAVIGATION -->
+<header class="sticky top-0 z-50 glass-card border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<a href="#welcome-section" class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-yellow-400 to-amber-600 p-0.5 shadow-lg shadow-amber-500/20"><div class="w-full h-full bg-[#020617] rounded-[10px] flex flex-col items-center justify-center"><span class="text-[11px] font-black text-amber-400 leading-none">IOIS</span><span class="text-[7px] font-bold text-slate-400">INDIA</span></div></div>
+<div><div class="flex items-center gap-2"><span class="text-base sm:text-xl font-black tracking-tight text-white">IOIS <span class="text-amber-400">PLATFORM</span></span><span class="hidden sm:inline-flex text-[10px] font-extrabold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded-full">VERIFIED 2026</span></div><p class="text-[9px] sm:text-[11px] text-slate-400 font-medium">INDIAN ONLINE INCOME SUPPORTING SYSTEM</p></div>
+</a>
+<div class="flex items-center gap-2 sm:gap-3">
+<!-- डिजिटल लॉक (तिरंगे थीम में, IOIS INDIA के साथ) -->
+<div class="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-900 border border-amber-500/40 shadow-md shadow-amber-500/10" title="IOIS डिजिटल लॉक - सुरक्षित इंडियन पोर्टल">
+  <i data-lucide="lock" class="w-4 h-4 text-amber-400 animate-pulse"></i>
+  <div class="flex flex-col">
+    <span class="text-[9px] font-black tracking-wider tiranga-text leading-none">IOIS INDIA</span>
+    <span class="text-[8px] text-emerald-400 font-bold">SECURED</span>
   </div>
 </div>
 
-<!-- 2. HEADER -->
-<header class="bg-slate-950/90 backdrop-blur-xl border-b border-amber-500/20 py-5 px-8 sticky top-[58px] z-50">
-  <div class="container mx-auto flex items-center justify-between">
-    <div class="flex items-center gap-5">
-      <img src="logo.png" alt="IOIS" class="w-16 h-16 rounded-full border-2 border-amber-500 shadow-2xl" onerror="this.src='https://via.placeholder.com/60'">
-      <div>
-        <h1 class="tiranga-text text-3xl font-black">IOIS PLATFORM</h1>
-        <p class="gold-metallic-text text-[11px] uppercase tracking-widest">National Online Support Infrastructure</p>
-      </div>
-    </div>
-    <div class="hidden lg:block">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" target="_blank" class="bg-white text-black px-10 py-3.5 rounded-full font-black text-xs shadow-2xl hover:bg-amber-400 transition-all">GET YOUR MASTER PASS</a>
-    </div>
-  </div>
+<button onclick="openAIChat()" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/10 border border-amber-500/40 hover:bg-amber-500/20 text-amber-300 text-xs font-bold transition"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-400"></i><span class="hidden md:inline">AI असिस्टेंट</span></button>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 transition transform hover:scale-105"><i data-lucide="shield-check" class="w-4 h-4"></i><span>REGISTER / JOIN</span></a>
+<!-- MOBILE MENU BUTTON -->
+<button onclick="toggleMobileMenu()" class="p-2 rounded-xl bg-slate-900 border border-slate-700 text-amber-400 md:hidden"><i data-lucide="menu" class="w-5 h-5"></i></button>
+</div></div>
+
+<!-- DESKTOP NAV (नए पेज जोड़े गए हैं) -->
+<nav class="hidden md:flex border-t border-slate-800/60 bg-slate-950/60 px-4 py-2 overflow-x-auto items-center justify-center gap-3 lg:gap-5 text-[11px] font-bold text-slate-300 whitespace-nowrap">
+<a href="#welcome-section" class="hover:text-amber-400">👋 वेलकम जोन</a>
+<a href="panchang.html" class="hover:text-amber-400 flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-amber-400"></i> पंचांग</a>
+<a href="news.html" class="hover:text-amber-400 flex items-center gap-1"><i data-lucide="newspaper" class="w-3 h-3 text-amber-400"></i> ताजा न्यूज़</a>
+<a href="job.html" class="hover:text-amber-400 flex items-center gap-1"><i data-lucide="briefcase" class="w-3 h-3 text-amber-400"></i> जॉब्स</a>
+<a href="idcard.html" class="hover:text-amber-400 flex items-center gap-1"><i data-lucide="id-card" class="w-3 h-3 text-amber-400"></i> आईडी कार्ड</a>
+<a href="#about-iois" class="hover:text-amber-400">💡 प्लेटफॉर्म गाइड</a>
+<a href="#plans-section" class="hover:text-amber-400">📦 सभी 7 प्लान्स</a>
+<a href="#interview-portal" class="hover:text-amber-400">📝 इंटरव्यू व प्रश्नोत्तर</a>
+<a href="#calculator-section" class="hover:text-amber-400">💰 पेआउट कैलकुलेटर</a>
+<a href="#clock-section" class="hover:text-amber-400">⏰ डिजिटल घड़ी</a>
+<a href="#parents-safety" class="hover:text-amber-400">🛡️ सुरक्षा</a>
+<a href="#faq-section" class="hover:text-amber-400">❓ सामान्य प्रश्न</a>
+<a href="#legal-center" class="hover:text-amber-400">⚖️ लीगल</a>
+<a href="#contact-hub" class="hover:text-amber-400">📞 सपोर्ट</a>
+</nav>
+
+<!-- MOBILE SLIDE OVER MENU -->
+<div id="mobile-menu" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex flex-col p-6 space-y-4 md:hidden overflow-y-auto">
+<div class="flex items-center justify-between border-b border-slate-800 pb-4"><span class="text-white font-black text-lg">IOIS MENU & NAV</span><button onclick="toggleMobileMenu()" class="text-slate-400 hover:text-white p-2"><i data-lucide="x" class="w-6 h-6"></i></button></div>
+<div class="flex flex-col space-y-3 text-sm font-bold text-slate-200">
+<a href="#welcome-section" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>👋 वेलकम ज़ोन व 5 शुरुआती सवाल</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="panchang.html" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-amber-300"><span>📅 दैनिक पंचांग (Panchang)</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="news.html" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-amber-300"><span>📰 ताजा खबरें व अपडेट्स (News)</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="job.html" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-amber-300"><span>💼 सरकारी व प्राइवेट जॉब्स (Jobs)</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="idcard.html" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-amber-300"><span>🆔 डिजिटल आईडी कार्ड (ID Card)</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#about-iois" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>💡 प्लेटफॉर्म गाइड व जानकारी</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#plans-section" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>📦 सभी 7 मास्टर प्लान्स</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#interview-portal" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>📝 15-प्रश्न वास्तविक इंटरव्यू</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#calculator-section" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>💰 लाइव रेफरल पेआउट कैलकुलेटर</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#clock-section" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>⏰ आधिकारिक डिजिटल घड़ी</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#parents-safety" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>🛡️ सुरक्षा व जिम्मेदार उपयोग</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#faq-section" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>❓ 35 सामान्य प्रश्न (FAQ)</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#legal-center" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>⚖️ लीगल सेंटर व नीतियाँ</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+<a href="#contact-hub" onclick="toggleMobileMenu()" class="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between"><span>📞 24x7 सपोर्ट हेल्पलाइन</span><i data-lucide="chevron-right" class="w-4 h-4 text-amber-400"></i></a>
+</div>
+<div class="pt-2"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" target="_blank" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs uppercase text-center block">REGISTER / JOIN NOW (VERIFIED PASS)</a></div>
+</div>
 </header>
 
-<main class="container mx-auto px-4 py-16 space-y-24">
+<!-- LIVE PAYOUT TICKER -->
+<div class="bg-slate-950 border-b border-slate-800 text-xs py-2 px-4 flex flex-col md:flex-row items-center justify-between gap-2 z-40">
+<div class="flex items-center gap-2 shrink-0"><span class="flex h-2 w-2 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span></span><span class="font-extrabold text-amber-400 uppercase flex items-center gap-1"><i data-lucide="zap" class="w-3.5 h-3.5"></i> LIVE PAYOUT UPDATES:</span></div>
+<div class="overflow-hidden w-full relative h-6 flex items-center"><div id="ticker-content" class="animate-ticker normal text-slate-200 font-medium space-x-8">
+<span>🚀 <strong class="text-amber-400">PLAN 01:</strong> Bal Vikas Access - ₹10 | ₹7 Instant Referral Payout</span><span>⚡ <strong class="text-sky-400">PLAN 02:</strong> Youth Skill Access - ₹49 | ATS Resume & AI Prompts | ₹34 Payout</span><span>📚 <strong class="text-indigo-400">PLAN 03:</strong> Career & Job Access - ₹99 | Class 6-12 Books | ₹64 Payout</span><span>🛡️ <strong class="text-emerald-400">PLAN 04:</strong> Family VIP Access - ₹199 | Screen Control & Safety | ₹119 Payout</span><span>🎯 <strong class="text-purple-400">PLAN 05:</strong> Student Elite Access - ₹299 | SSC, Railway, Bank Notes | ₹179 Payout</span><span>💼 <strong class="text-yellow-400">PLAN 06:</strong> Agency Reseller Hub - ₹499 | WhatsApp Automation | ₹274 Payout</span><span>👑 <strong class="text-amber-300">PLAN 07:</strong> Lifetime Master Access - ₹999 | All 6 Plans + Mentorship | ₹499 Instant Payout</span>
+</div></div>
+<div class="flex items-center gap-1 shrink-0 text-[10px] font-bold"><span class="text-slate-400">गति:</span><button onclick="setTickerSpeed('paused')" id="btn-pause" class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300">पॉज़</button><button onclick="setTickerSpeed('slow')" id="btn-slow" class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300">धीमी</button><button onclick="setTickerSpeed('normal')" id="btn-normal" class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">सामान्य</button><button onclick="setTickerSpeed('fast')" id="btn-fast" class="px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300">तेज़</button></div>
+</div>
 
-  <!-- 3. PSYCHOLOGICAL INTERVIEW PORTAL (ALL 15 QUESTIONS) -->
-  <section id="assessment" class="glass-card-premium border-2 border-amber-500/40 relative">
-    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-amber-500 text-black px-6 py-1 rounded-full font-black text-[10px] uppercase">Corporate Evaluation Level</div>
-    <div class="text-center mb-12">
-      <h2 class="gold-metallic-text text-4xl md:text-6xl uppercase tracking-tighter">Elite Visionary Assessment</h2>
-      <p class="text-slate-400 text-lg mt-4 italic">यह 15 सवालों का विश्लेषण आपके भविष्य का नक्शा तैयार करेगा।</p>
+<main class="container mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-16 flex-1">
+
+<!-- प्रीमियम एनालॉग घड़ी (वेलकम सेक्शन के ठीक ऊपर, सोने जैसी चमकती बॉर्डर, 12 सीधे डिजिट और सप्तरंगी कांटे) -->
+<section class="max-w-md mx-auto">
+<div class="relative p-6 rounded-3xl bg-gradient-to-b from-slate-900/90 to-slate-950/95 border-2 border-amber-400 shadow-[0_0_35px_rgba(245,158,11,0.25)] text-center space-y-4">
+  <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 px-4 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-md">
+    IOIS INDIA • PREMIUM LIVE CLOCK
+  </div>
+
+  <!-- एनालॉग डायल -->
+  <div class="relative w-48 h-48 mx-auto rounded-full bg-slate-950 border-4 border-amber-500/80 shadow-inner flex items-center justify-center my-2" id="analog-clock-face">
+    <!-- 12 डिजिट मार्कर (1 से 12 सीधे लिखे हुए) -->
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 8px; left: 50%; transform: translateX(-50%);">12</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 22px; right: 38px;">1</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 60px; right: 18px;">2</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 50%; right: 10px; transform: translateY(-50%);">3</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="bottom: 60px; right: 18px;">4</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="bottom: 22px; right: 38px;">5</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="bottom: 8px; left: 50%; transform: translateX(-50%);">6</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="bottom: 22px; left: 38px;">7</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="bottom: 60px; left: 18px;">8</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 50%; left: 10px; transform: translateY(-50%);">9</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 60px; left: 18px;">10</span>
+    <span class="absolute text-[12px] font-black text-amber-300" style="top: 22px; left: 38px;">11</span>
+
+    <!-- सेंटर ब्रांडिंग -->
+    <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none opacity-40">
+      <span class="text-[9px] font-black text-amber-400">IOIS</span>
+      <span class="text-[7px] font-bold text-white">INDIA</span>
     </div>
 
-    <div id="survey-box" class="max-w-4xl mx-auto min-h-[500px] flex flex-col justify-center">
-      <div id="intro-btn-area" class="text-center py-10 active">
-          <h3 class="text-white text-3xl font-black mb-10 leading-tight">क्या आप राहुल और प्रिया की तरह डिजिटल क्रांति का हिस्सा बनकर <span class="text-amber-400">आर्थिक आज़ादी</span> पाने के लिए तैयार हैं?</h3>
-          <button onclick="startEval()" class="btn-premium text-xl">इंटरव्यू शुरू करें <i class="fa-solid fa-bolt ml-2"></i></button>
-      </div>
+    <!-- सप्तरंगी कांटे (Rainbow Hands) -->
+    <!-- घंटा काँटा (लाल/ऑरेंज) -->
+    <div id="hour-hand" class="absolute w-1.5 h-12 bg-gradient-to-t from-red-500 to-orange-400 rounded-full origin-bottom bottom-1/2 left-[calc(50%-3px)] transition-transform duration-100"></div>
+    <!-- मिनट काँटा (नीला/आसमानी) -->
+    <div id="minute-hand" class="absolute w-1 h-16 bg-gradient-to-t from-sky-500 to-indigo-400 rounded-full origin-bottom bottom-1/2 left-[calc(50%-2px)] transition-transform duration-100"></div>
+    <!-- सेकंड काँटा (हरा/पीला सप्तरंगी प्रभाव) -->
+    <div id="second-hand" class="absolute w-0.5 h-20 bg-gradient-to-t from-emerald-400 via-yellow-300 to-pink-500 rounded-full origin-bottom bottom-1/2 left-[calc(50%-1px)] transition-transform duration-75"></div>
+    <!-- सेंटर पिन -->
+    <div class="absolute w-3 h-3 rounded-full bg-amber-400 border-2 border-slate-900 z-10"></div>
+  </div>
 
-      <div id="questions-area" class="hidden"></div>
+  <!-- डिजिटल समय, दिनांक और दिन लाइव प्रदर्शन -->
+  <div class="space-y-1 pt-1 border-t border-slate-800">
+    <div id="live-digital-time" class="text-2xl sm:text-3xl font-mono font-black text-amber-400 tracking-wider">00:00:00 AM</div>
+    <div id="live-digital-date" class="text-xs font-bold text-slate-300">वार व दिनांक लोड हो रहा है...</div>
+    <div class="text-[10px] text-emerald-400 font-bold uppercase">भारतीय मानक समय (IST) • IOIS SYSTEM ACTIVE</div>
+  </div>
+</div>
+</section>
 
-      <!-- THE CONFIDENCE WELCOME MESSAGE -->
-      <div id="welcome-vision" class="hidden space-y-12 animate-zoomIn">
-        <div class="text-center p-12 bg-slate-950 border-4 border-green-500 rounded-[50px] shadow-[0_0_120px_rgba(34,197,94,0.3)]">
-            <h3 class="text-green-400 text-5xl font-black mb-8">स्वागत है! आप 'सिस्टम मास्टर' के रूप में स्वीकृत हैं!</h3>
-            <p class="text-white text-2xl leading-relaxed font-medium">आपका माइंडसेट 100% एक **Master Tier Leader** से मैच करता है। IOIS प्लेटफॉर्म आपको वह शक्ति और संसाधन देने के लिए प्रतिबद्ध है जिसकी मदद से आप सोते हुए भी पैसे कमा सकते हैं।</p>
-            <div class="mt-10 flex flex-wrap justify-center gap-8">
-                <span class="bg-slate-900 px-8 py-4 rounded-2xl border-2 border-amber-500 text-amber-300 font-black text-xl shadow-lg"><i class="fa-solid fa-trophy mr-3"></i> ELITE TIER APPROVED</span>
-                <span class="bg-slate-900 px-8 py-4 rounded-2xl border-2 border-amber-500 text-amber-300 font-black text-xl shadow-lg"><i class="fa-solid fa-user-check mr-3"></i> VISION VERIFIED</span>
-            </div>
-        </div>
+<!-- USER WELCOME & INITIAL CHECK-IN WIZARD -->
+<section id="welcome-section">
+<div class="glass-card-gold p-6 sm:p-10 rounded-3xl space-y-6 text-center" id="welcome-wizard-box">
+<div class="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/30 shadow-lg"><i data-lucide="sparkles" class="w-8 h-8"></i></div>
+<div class="space-y-2 max-w-2xl mx-auto">
+<span class="text-xs font-black text-amber-400 uppercase tracking-widest">OFFICIAL WELCOME & ONBOARDING</span>
+<h2 class="text-3xl sm:text-4xl font-black text-white">नमस्ते! <span class="gold-text">IOIS PLATFORM</span> पर आपका हार्दिक स्वागत है 🙏</h2>
+<p class="text-slate-300 text-sm sm:text-base leading-relaxed">यह भारत का आधिकारिक डिजिटल लर्निंग व इनकम सपोर्टिंग पोर्टल है। क्या आप आधिकारिक सरकारी चयन प्रक्रिया या प्रीमियम जॉब इंटरव्यू की तरह हमारे साथ जुड़कर कुछ खास शुरुआती सवालों के जवाब देना चाहते हैं?</p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+<button onclick="startInitialCheckIn(true)" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 text-slate-950 font-black text-sm uppercase shadow-xl shadow-amber-500/20 transition transform hover:scale-105 flex items-center gap-2"><i data-lucide="check-circle" class="w-5 h-5"></i><span>हाँ, मैं सवालों के जवाब देना चाहता हूँ</span></button>
+<button onclick="startInitialCheckIn(false)" class="px-8 py-4 rounded-2xl bg-slate-900 border border-slate-700 hover:border-slate-500 text-white font-bold text-sm transition flex items-center gap-2"><i data-lucide="layout-grid" class="w-5 h-5 text-amber-400"></i><span>नहीं, सीधे होमपेज और प्लान्स दिखाएँ</span></button>
+</div>
+</div>
+</section>
 
-        <div class="glass-card-premium border-amber-500 bg-gradient-to-br from-black via-slate-900 to-black p-12 text-center">
-            <h4 class="gold-metallic-text text-4xl font-black mb-8">BEST CHOICE FOR YOU: LIFETIME MASTER (PLAN 07)</h4>
-            <p class="text-slate-300 text-xl mb-10 leading-relaxed">इंटरव्यू के आधार पर, आप सिर्फ कमाने के लिए नहीं बल्कि **सफल लीडर्स बनाने** के लिए जन्मे हैं। मास्टर प्लान के साथ, आप राहुल, अमित और प्रिया जैसे हजारों लोगों के आदर्श बनेंगे।</p>
-            
-            <div class="instant-label text-2xl mb-12 py-5 px-10">₹499 INSTANT PAYOUT PER MASTER REFERRAL</div>
-            
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="btn-premium w-full py-8 text-3xl tracking-widest">अभी सक्रिय करें - ACTIVATE LEGACY</a>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- PLATFORM GUIDE / ABOUT IOIS -->
+<section id="about-iois"><div class="glass-card p-6 sm:p-10 rounded-3xl text-center space-y-6 border border-slate-800">
+<div class="inline-flex items-center gap-2 bg-amber-500/10 border border-amber-500/30 px-4 py-1.5 rounded-full text-amber-300 text-xs font-bold uppercase"><i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-400"></i><span>आधिकारिक डिजिटल लर्निंग व इनकम सपोर्टिंग पोर्टल</span></div>
+<h2 class="text-3xl sm:text-5xl font-black text-white leading-tight"><span class="tiranga-text">IOIS PLATFORM</span> क्या है और यह कैसे काम करता है?</h2>
+<p class="text-slate-300 text-base sm:text-lg max-w-4xl mx-auto text-justify sm:text-center leading-relaxed"><strong class="text-amber-400">IOIS (Indian Online Income Supporting System)</strong> भारत का पहला पारदर्शी डिजिटल इकोसिस्टम है। यहाँ छात्रों और युवाओं के लिए उच्च कोटि की अध्ययन सामग्री, AI प्रॉम्ट्स और ऑटोमेशन टूल्स उपलब्ध हैं। जब आप उपयोगी डिजिटल सामग्री दूसरों के साथ साझा करते हैं, तो सिस्टम आपको <strong class="text-emerald-400">50% से 70% तक का तत्काल रेफरल पेआउट</strong> प्रदान करता है.</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
+<div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800"><div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mb-3"><i data-lucide="book-open" class="w-5 h-5"></i></div><h4 class="text-white font-black text-sm mb-1">1. डिजिटल सामग्री</h4><p class="text-slate-400 text-xs">NCERT, AI टूल्स, प्रतियोगी नोट्स और ऑटोमेशन बंडल。</p></div>
+<div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800"><div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3"><i data-lucide="zap" class="w-5 h-5"></i></div><h4 class="text-white font-black text-sm mb-1">2. 50%-70% पेआउट</h4><p class="text-slate-400 text-xs">सत्यापन होते ही तुरंत वॉलेट/खाते में डायरेक्ट क्रेडिट。</p></div>
+<div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800"><div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center mb-3"><i data-lucide="shield-check" class="w-5 h-5"></i></div><h4 class="text-white font-black text-sm mb-1">3. 100% सुरक्षा व सपोर्ट</h4><p class="text-slate-400 text-xs">256-Bit एन्क्रिप्शन और 24x7 व्हाट्सएप/टेलीग्राम हेल्पलाइन。</p></div>
+</div></div></section>
 
-  <!-- 4. UTILITIES: STRAIGHT CLOCK & PANCHANG & VIDEO -->
-  <section class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-    <div class="glass-card-premium text-center flex flex-col justify-between border-b-8 border-b-amber-500">
-      <h3 class="gold-metallic-text font-black mb-8 uppercase text-xl">IOIS Real-Time Clock</h3>
-      <div class="clock-outer mb-8">
-        <div class="clock-num">
-          <span class="n1">1</span><span class="n2">2</span><span class="n3">3</span><span class="n4">4</span><span class="n5">5</span><span class="n6">6</span>
-          <span class="n7">7</span><span class="n8">8</span><span class="n9">9</span><span class="n10">10</span><span class="n11">11</span><span class="n12">12</span>
-        </div>
-        <div id="main-h" class="hand h-hand"></div>
-        <div id="main-m" class="hand m-hand"></div>
-        <div id="main-s" class="hand s-hand"></div>
-        <div class="center-dot" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:12px;height:12px;background:var(--gold);border-radius:50%;z-index:20;"></div>
-      </div>
-      <div id="main-time" class="text-5xl font-mono font-black text-white tracking-tighter">12:00:00 AM</div>
-      <div id="main-dt" class="text-sm text-amber-500 mt-5 font-black uppercase">Loading Indian Panchang Date...</div>
-    </div>
+<!-- ALL 7 PLANS SECTION -->
+<section id="plans-section" class="space-y-8"><div class="text-center max-w-3xl mx-auto space-y-2"><span class="text-xs font-black text-amber-400 uppercase tracking-widest">OFFICIAL PLANS</span><h2 class="text-3xl sm:text-4xl font-black text-white">IOIS के <span class="gold-text">7 मुख्य मास्टर प्लान्स</span></h2><p class="text-slate-400 text-sm">सामग्री, फीस और तत्काल पेआउट का संपूर्ण विवरण:</p></div>
+<div id="plans-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div></section>
 
-    <div class="glass-card-premium border-b-8 border-b-saffron">
-      <h3 class="gold-metallic-text font-black mb-6 uppercase text-center"><i class="fa-solid fa-calendar-day mr-2"></i> दैनिक पंचांग विश्लेषण</h3>
-      <div class="space-y-6 text-base text-slate-100">
-        <div class="flex justify-between border-b border-slate-800 pb-4"><span>शुभ मुहूर्त:</span><strong class="text-emerald-400">08:15 AM - 10:30 AM</strong></div>
-        <div class="flex justify-between border-b border-slate-800 pb-4"><span>भाग्यशाली रंग:</span><strong class="text-amber-400">केसरिया, पीला, हरा</strong></div>
-        <div class="flex justify-between border-b border-slate-800 pb-4"><span>आज का मंत्र:</span><strong class="text-sky-300">"परिश्रम ही सफलता की कुंजी है"</strong></div>
-        <div class="p-4 bg-slate-950/80 rounded-2xl border border-amber-500/20 italic text-xs leading-loose">
-          <i class="fa-solid fa-lightbulb text-amber-400 mr-2"></i> विशेष टिप: आज डिजिटल इन्वेस्टमेंट और नेटवर्किंग के लिए ब्रह्मांडीय ऊर्जा आपके पक्ष में है।
-        </div>
-      </div>
-    </div>
+<!-- INTERVIEW & ASSESSMENT PORTAL -->
+<section id="interview-portal"><div class="glass-card-gold p-6 sm:p-10 rounded-3xl space-y-6">
+<div class="text-center max-w-3xl mx-auto space-y-2"><span class="text-xs font-black text-amber-400 uppercase">REAL INTERVIEW & ASSESSMENT</span><h2 class="text-2xl sm:text-4xl font-black text-white">📝 नया उपयोगकर्ता <span class="gold-text">15-प्रश्न वास्तविक इंटरव्यू</span></h2><p class="text-slate-300 text-xs sm:text-sm">हर प्रश्न एक-एक करके पढ़ें, चार विकल्पों में से अपना वास्तविक उत्तर चुनें। आपके उत्तरों के आधार पर अंतिम परिणाम और उपयुक्त प्लान सुझाव तैयार होगा।</p></div>
+<div id="interview-box" class="max-w-3xl mx-auto"></div>
+</div></section>
 
-    <div class="glass-card-premium border-b-8 border-b-green-600">
-      <h3 class="gold-metallic-text font-black mb-6 uppercase text-center"><i class="fa-solid fa-video mr-2"></i> IOIS SMART TV</h3>
-      <div class="relative w-full aspect-video rounded-3xl overflow-hidden border-2 border-amber-500/30 shadow-2xl">
-        <iframe class="w-full h-full" src="https://www.youtube.com/embed/0gYd3mIxksc" allowfullscreen></iframe>
-      </div>
-      <p class="text-[11px] text-slate-500 mt-6 text-center font-bold">आधिकारिक ट्रेनिंग और सिस्टम अपडेट यहाँ देखें।</p>
-    </div>
-  </section>
+<!-- PAYOUT CALCULATOR -->
+<section id="calculator-section"><div class="glass-card p-6 sm:p-10 rounded-3xl border border-slate-800 space-y-6"><div class="text-center max-w-2xl mx-auto space-y-2"><span class="text-xs font-black text-emerald-400 uppercase">EARNINGS SIMULATOR</span><h2 class="text-2xl sm:text-3xl font-black text-white">💰 लाइव <span class="gold-text">रेफरल पेआउट कैलकुलेटर</span></h2><p class="text-slate-400 text-xs sm:text-sm">प्लान और रेफरल संख्या चुनकर अपनी कुल कमाई तुरंत देखें:</p></div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto"><div class="space-y-4"><div><label class="text-xs font-bold text-slate-300">प्लान चुनें:</label><select id="calc-plan" onchange="calculatePayout()" class="w-full mt-1 bg-slate-900 border border-slate-700 text-white rounded-xl p-3 text-sm focus:border-amber-400 outline-none"><option value="7">Plan 01: Bal Vikas (₹10) -> ₹7 Payout</option><option value="34">Plan 02: Youth Skill (₹49) -> ₹34 Payout</option><option value="64">Plan 03: Career Access (₹99) -> ₹64 Payout</option><option value="119">Plan 04: Family VIP (₹199) -> ₹119 Payout</option><option value="179">Plan 05: Student Elite (₹299) -> ₹179 Payout</option><option value="274">Plan 06: Reseller Hub (₹499) -> ₹274 Payout</option><option value="499" selected>Plan 07: Master Access (₹999) -> ₹499 Payout</option></select></div><div><div class="flex justify-between text-xs font-bold text-slate-300 mb-1"><span>रेफरल संख्या:</span><span id="calc-count-label" class="text-amber-400 font-extrabold text-sm">10 लोग</span></div><input type="range" id="calc-count" min="1" max="100" value="10" oninput="calculatePayout()" class="w-full accent-amber-400 cursor-pointer"></div></div><div class="bg-slate-950 p-6 rounded-2xl border border-emerald-500/40 text-center space-y-2"><span class="text-xs font-bold text-slate-400">आपकी अनुमानित कुल कमाई:</span><div id="calc-total" class="text-4xl sm:text-5xl font-black text-emerald-400">₹4,990</div><p class="text-[11px] text-slate-400">100% इंस्टेंट वेरिफिकेशन व डायरेक्ट ट्रांसफर</p></div></div></div></section>
 
-  <!-- 5. THE 7 MASTER PLANS (FULL ANALYTICS & PSYCHOLOGY STORIES) -->
-  <section id="all-plans">
-    <div class="text-center mb-20">
-      <h2 class="gold-metallic-text text-5xl md:text-7xl font-black uppercase">IOIS Master Ecosystem</h2>
-      <p class="text-slate-400 text-xl mt-6 max-w-3xl mx-auto italic font-medium">ये 7 प्लांस नहीं, बल्कि आपकी आज़ादी के 7 द्वार हैं। चुनें अपना सपना।</p>
-    </div>
+<!-- PARENTS SAFETY -->
+<section id="parents-safety"><div class="glass-card p-6 sm:p-10 rounded-3xl border border-slate-800"><div class="text-center max-w-3xl mx-auto"><span class="text-xs font-black text-sky-400 uppercase">SAFETY & RESPONSIBLE USE</span><h2 class="text-2xl sm:text-3xl font-black text-white mt-2">🛡️ सुरक्षा, डिजिटल सावधानी और जिम्मेदार उपयोग</h2><p class="text-slate-300 text-sm leading-7 mt-4 text-justify">किसी भी डिजिटल प्लेटफॉर्म पर भुगतान या व्यक्तिगत जानकारी साझा करने से पहले उपयोगकर्ता को उपलब्ध आधिकारिक जानकारी पढ़नी चाहिए। OTP, UPI PIN, ATM PIN, पासवर्ड या बैंकिंग लॉगिन किसी व्यक्ति के साथ साझा नहीं करना चाहिए। किसी भी रेफरल या पेआउट को निश्चित आय की गारंटी नहीं समझना चाहिए; वास्तविक परिणाम उपयोगकर्ता की गतिविधि, सत्यापन, पात्रता और लागू नियमों पर निर्भर कर सकते हैं.</p></div></div></section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-      
-      <!-- PLAN 01 -->
-      <div class="glass-card-premium border-t-[12px] border-orange-500 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-orange-400 tracking-widest uppercase">Elite Pass 01</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Bal Vikas</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹10</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">NCERT 1-5 PDFs, वर्कशीट्स और बेसिक अर्निंग एंट्री पास।</p>
-          <div class="instant-label">₹7 INSTANT PAYOUT (70%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> अमित ने ₹10 से शुरू किया। 100 छात्रों को पढ़ाई के लिए जागरूक किया और ₹700 तुरंत कमाए। आज वो इंडिपेंडेंट है।</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹10</a>
-      </div>
+<!-- FAQ SECTION -->
+<section id="faq-section"><div class="glass-card-gold p-6 sm:p-10 rounded-3xl space-y-6"><div class="text-center max-w-4xl mx-auto"><span class="text-xs font-black text-amber-400 uppercase">35 COMPLETE ANSWERS</span><h2 class="text-2xl sm:text-4xl font-black text-white">❓ अक्सर पूछे जाने वाले प्रश्न — <span class="gold-text">पूरे और स्पष्ट उत्तर</span></h2><p class="text-slate-300 text-sm mt-2">यहाँ सामान्य उपयोगकर्ता प्रश्नों के संपूर्ण उत्तर दिए गए हैं ताकि नए सदस्य को सिस्टम, प्लान, भुगतान, रेफरल, सुरक्षा और सहायता प्रक्रिया समझने में किसी संक्षिप्त उत्तर पर निर्भर न रहना पड़े।</p></div><div id="faq-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div></div></section>
 
-      <!-- PLAN 02 -->
-      <div class="glass-card-premium border-t-[12px] border-sky-500 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-sky-400 tracking-widest uppercase">Skill Pass 02</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Youth Skill</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹49</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">Pro CV Templates, AI Prompt Guide और डिजिटल स्किल टूल्स।</p>
-          <div class="instant-label">₹34 INSTANT PAYOUT (70%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> प्रिया ने 10 सहेलियों को प्रोफेशनल CV टूल्स दिए और ₹340 तुरंत कमाए। अब वो अपनी टीम की लीडर है।</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹49</a>
-      </div>
+<!-- LEGAL CENTRE -->
+<section id="legal-center"><div class="space-y-6"><div class="text-center max-w-4xl mx-auto"><span class="text-xs font-black text-amber-400 uppercase">OFFICIAL INFORMATION & LEGAL CENTRE</span><h2 class="text-2xl sm:text-4xl font-black text-white mt-2"><span class="tiranga-text">IOIS PLATFORM</span> — नीतियाँ, घोषणा और आधिकारिक जानकारी</h2><p class="text-slate-400 text-sm mt-2">नीचे की जानकारी प्लेटफॉर्म के उपयोग, संपर्क, गोपनीयता, रेफरल, रिटर्न और जिम्मेदार उपयोग को स्पष्ट रूप से समझाने के लिए है। लागू कानून, भुगतान सेवा प्रदाता के नियम और वास्तविक परिस्थितियाँ हमेशा प्राथमिक रहेंगी।</p></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+<div id="about-us" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">🇮🇳 About Us — हमारे बारे में</h3><p class="text-slate-300 text-sm leading-7 mt-3">IOIS (Indian Online Income Supporting System) को डिजिटल सीखने, उपयोगी संसाधनों और ऑनलाइन सहायता को एक सरल इंटरफेस में प्रस्तुत करने के उद्देश्य से तैयार किया गया है. प्लेटफॉर्म पर शिक्षा-संबंधी डिजिटल सामग्री, AI-संबंधित संसाधन, करियर सामग्री, सुरक्षा गाइड और रेफरल-आधारित इंसेंटिव संरचना की जानकारी दिखाई जाती है। उपयोगकर्ता को किसी भी सेवा या भुगतान से पहले संबंधित विवरण और लागू शर्तें पढ़नी चाहिए.</p></div>
+<div id="contact-policy" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">📞 Contact & Grievance Support</h3><p class="text-slate-300 text-sm leading-7 mt-3">सहायता के लिए आधिकारिक WhatsApp, Telegram या ईमेल चैनल का उपयोग करें. संदेश में समस्या का स्पष्ट विवरण, संबंधित प्लान और आवश्यक गैर-संवेदनशील संदर्भ दें. OTP, UPI PIN, पासवर्ड या पूर्ण बैंकिंग क्रेडेंशियल कभी न भेजें. विवाद या शिकायत में उपलब्ध रिकॉर्ड और भुगतान संदर्भ सुरक्षित रखें.</p></div>
+<div id="privacy-policy" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">🔐 Privacy Policy — गोपनीयता नीति</h3><p class="text-slate-300 text-sm leading-7 mt-3">उपयोगकर्ता द्वारा फॉर्म या सहायता चैनल पर दी गई जानकारी का उपयोग संबंधित सेवा, सत्यापन, सहायता, रिकॉर्ड प्रबंधन और संचार के लिए किया जा सकता है. आवश्यकतानुसार डेटा को सुरक्षित रखने के उचित तकनीकी उपाय अपनाए जाने चाहिए. उपयोगकर्ता को अनावश्यक संवेदनशील जानकारी साझा नहीं करनी चाहिए. किसी तीसरे पक्ष की सेवा, जैसे भुगतान या फॉर्म प्रदाता, की अपनी गोपनीयता नीति हो सकती है.</p></div>
+<div id="referral-policy" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">🔗 Referral Policy — रेफरल नीति</h3><p class="text-slate-300 text-sm leading-7 mt-3">रेफरल इंसेंटिव केवल पात्र और सत्यापित रेफरल पर लागू माना जाएगा. गलत जानकारी, नकली खाते, स्वयं-रेफरल, धोखाधड़ी, भुगतान में हेरफेर, स्पैम या भ्रामक प्रचार से रेफरल अमान्य किया जा सकता है. प्रदर्शित payout राशि प्लेटफॉर्म में दिए गए उदाहरण/संरचना के अनुसार है; वास्तविक भुगतान सत्यापन और लागू शर्तों के अधीन होगा.</p></div>
+<div id="return-policy" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">↩️ Return / Cancellation Policy — वापसी नीति</h3><p class="text-slate-300 text-sm leading-7 mt-3">डिजिटल सामग्री और डिजिटल एक्सेस की प्रकृति के कारण भुगतान के बाद रिटर्न या रिफंड की पात्रता सेवा की वास्तविक स्थिति, डिलीवरी, लागू शर्तों और कानून पर निर्भर करेगी. भुगतान करने से पहले प्लान, कीमत और सामग्री ध्यान से जाँचें. गलत भुगतान, डुप्लिकेट भुगतान या तकनीकी समस्या होने पर आधिकारिक सपोर्ट से प्रमाण सहित संपर्क करें.</p></div>
+<div id="declaration" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">📜 Declaration — आधिकारिक घोषणा</h3><p class="text-slate-300 text-sm leading-7 mt-3">IOIS की वेबसाइट पर दिखाई गई कमाई या payout जानकारी को निश्चित आय, नौकरी, निवेश पर गारंटीड रिटर्न या वित्तीय सलाह के रूप में नहीं समझना चाहिए. किसी भी व्यक्ति को केवल कमाई के दावे के आधार पर भुगतान करने के लिए बाध्य नहीं किया जाना चाहिए. उपयोगकर्ता अपने निर्णय, पात्रता, कर और कानूनी दायित्वों के लिए स्वयं जिम्मेदार है.</p></div>
+<div id="terms-policy" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">📋 Terms of Use — उपयोग की शर्तें</h3><p class="text-slate-300 text-sm leading-7 mt-3">प्लेटफॉर्म का उपयोग वैध उद्देश्य से करें. कॉपीराइट उल्लंघन, गलत सूचना, impersonation, स्पैम, धोखाधड़ी, सिस्टम का दुरुपयोग या किसी अन्य व्यक्ति के खाते/डेटा में अनधिकृत हस्तक्षेप निषिद्ध है. सामग्री, कीमत, सुविधाएँ या तकनीकी व्यवस्था समय के साथ लागू आधिकारिक अपडेट के अनुसार बदल सकती है.</p></div>
+<div id="disclaimer" class="legal-card p-6 rounded-3xl"><h3 class="text-xl font-black text-amber-300">⚠️ Disclaimer — अस्वीकरण</h3><p class="text-slate-300 text-sm leading-7 mt-3">वेबसाइट पर उपलब्ध शैक्षणिक, करियर, AI और रेफरल जानकारी सामान्य सूचना के लिए है. यह कानूनी, वित्तीय, कर, रोजगार या निवेश सलाह का विकल्प नहीं है. किसी बाहरी वेबसाइट, भुगतान सेवा, सोशल चैनल या AI सेवा के संचालन पर IOIS का पूर्ण तकनीकी नियंत्रण आवश्यक रूप से नहीं होता.</p></div>
+</div></div></section>
 
-      <!-- PLAN 03 -->
-      <div class="glass-card-premium border-t-[12px] border-indigo-500 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-indigo-400 tracking-widest uppercase">Career Pass 03</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Career Job</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹99</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">NCERT 6-12 Books, करियर काउंसलिंग और एडवांस रिसोर्स।</p>
-          <div class="instant-label">₹64 INSTANT PAYOUT (65%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> राहुल ने 20 दोस्तों को करियर गाइडेंस दी और ₹1280 कमाए। राहुल अब खुद का बॉस है।</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹99</a>
-      </div>
-
-      <!-- PLAN 04 -->
-      <div class="glass-card-premium border-t-[12px] border-green-500 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-green-400 tracking-widest uppercase">Family Pass 04</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Family VIP</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹199</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">Parents Corner, लाइफस्टाइल टिप्स और 100% सिक्योरिटी टूल्स।</p>
-          <div class="instant-label">₹119 INSTANT PAYOUT (60%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> शर्मा जी ने 5 परिवारों को डिजिटल सुरक्षा सिखाई और ₹595 तुरंत कमाए। समाज में मान बढ़ा।</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹199</a>
-      </div>
-
-      <!-- Row 2 -->
-      <div class="glass-card-premium border-t-[12px] border-purple-500 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-purple-400 tracking-widest uppercase">Success Pass 05</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Student Elite</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹299</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">Competitive Exam VIP Notes और सरकारी नौकरी तैयारी।</p>
-          <div class="instant-label">₹179 INSTANT PAYOUT (60%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> विकास ने 10 साथियों को प्रीमियम नोट्स दिलाए और ₹1790 कमाए। अब वो अपनी कोचिंग की फीस खुद भरता है।</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹299</a>
-      </div>
-
-      <div class="glass-card-premium border-t-[12px] border-yellow-600 flex flex-col justify-between">
-        <div>
-          <span class="text-xs font-black text-yellow-500 tracking-widest uppercase">Business Pass 06</span>
-          <h3 class="text-3xl font-black text-white mt-3 uppercase">Agency Hub</h3>
-          <div class="text-5xl font-black text-amber-400 my-6">₹499</div>
-          <p class="text-sm text-slate-400 mb-8 font-semibold">Reselling Rights, ऑटोमेशन और बिज़नेस डैशबोर्ड एक्सेस।</p>
-          <div class="instant-label">₹274 INSTANT PAYOUT (55%)</div>
-          <div class="story-box">
-            <p class="text-[12px] text-slate-300"><strong>कहानी:</strong> राज ने अपनी डिजिटल एजेंसी शुरू की। 10 सेल पर ₹2740 का शुद्ध मुनाफा। बिना किसी इन्वेस्टमेंट के!</p>
-          </div>
-        </div>
-        <a href="https://t.me/ioisplatform" class="btn-premium text-xs w-full mt-10 justify-center">ACTIVATE @ ₹499</a>
-      </div>
-
-      <!-- PLAN 07 MASTER -->
-      <div class="glass-card-premium border-4 border-white col-span-1 md:col-span-2 bg-gradient-to-br from-slate-900 via-amber-900/40 to-slate-950 relative overflow-hidden flex flex-col justify-between">
-        <div class="absolute top-4 right-4 bg-white text-black text-[10px] font-black px-6 py-2 rounded-full shadow-2xl">MASTER ARCHITECT</div>
-        <div>
-          <h3 class="gold-metallic-text text-5xl md:text-6xl font-black uppercase mt-6">Lifetime Master Access</h3>
-          <div class="text-7xl font-black text-amber-400 my-8">₹999</div>
-          <p class="text-slate-300 text-lg mb-10 leading-relaxed">IOIS प्लेटफॉर्म का कम्पलीट एक्सेस। सभी 6 प्लांस का फ्री लाइसेंस, लाइफटाइम अपडेट्स और सबसे ज्यादा पेआउट की गारंटी।</p>
-          <div class="instant-label text-3xl py-6 border-4">₹499 INSTANT PAYOUT RECEIVED (50%)</div>
-          <div class="story-box mt-8 bg-green-500/10 border-green-400">
-            <p class="text-sm text-white leading-loose"><strong>मास्टर कहानी (The Sanjay Model):</strong> संजय ने मास्टर प्लान लिया। मात्र 20 विज़नरी लीडर्स को जोड़ा और ₹9,980 तुरंत कमाए। आज संजय का नेटवर्क ऑटो-पायलट पर है और वो सोते हुए भी आय प्राप्त करता है।</p>
-          </div>
-        </div>
-        <div class="mt-12">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header" class="btn-premium w-full py-8 text-3xl tracking-widest uppercase">UNLOCK THE LEGACY @ ₹999</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 6. PER REFERRAL INSTANT PAYOUT CALCULATOR (HIGH ACCURACY) -->
-  <section id="calc-area" class="glass-card-premium border-4 border-amber-500/20">
-    <h3 class="gold-metallic-text text-4xl font-black text-center mb-16 uppercase tracking-widest">Instant Payout Received Calculator</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div class="space-y-12">
-        <div>
-          <label class="text-sm text-slate-400 font-black uppercase block mb-6">Select Your Target Active Plan:</label>
-          <select id="p-select" class="w-full bg-slate-900 border-2 border-slate-700 rounded-3xl p-6 text-white outline-none focus:border-amber-500 transition-all font-black text-lg" onchange="upCalc()">
-            <option value="7">Plan 01: ₹10 (₹7 Instant Payout)</option>
-            <option value="34">Plan 02: ₹49 (₹34 Instant Payout)</option>
-            <option value="64">Plan 03: ₹99 (₹64 Instant Payout)</option>
-            <option value="119">Plan 04: ₹199 (₹119 Instant Payout)</option>
-            <option value="179">Plan 05: ₹299 (₹179 Instant Payout)</option>
-            <option value="274">Plan 06: ₹499 (₹274 Instant Payout)</option>
-            <option value="499" selected>Plan 07: ₹999 (₹499 Instant Payout)</option>
-          </select>
-        </div>
-        <div>
-          <label class="text-sm text-slate-400 font-black uppercase block mb-6">Estimated Direct Referrals: <span id="r-val" class="text-amber-500 ml-4 text-2xl">10</span></label>
-          <input type="range" id="r-range" min="1" max="100" value="10" class="w-full h-4 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-amber-500" oninput="upCalc()">
-          <div class="flex justify-between text-[12px] text-slate-600 mt-5 font-black"><span>MIN: 1</span><span>MAX: 100+</span></div>
-        </div>
-      </div>
-      <div class="text-center p-16 bg-slate-950/90 rounded-[60px] border-4 border-amber-500/30 shadow-[0_0_80px_rgba(212,175,55,0.15)]">
-        <p class="text-sm text-slate-400 uppercase tracking-widest font-black mb-8">You Received Total Instant Payout Of</p>
-        <div id="total-val" class="text-8xl md:text-9xl font-black text-green-400 tracking-tighter">₹4,990</div>
-        <p class="text-lg text-emerald-500 mt-10 font-black uppercase tracking-widest animate-pulse">✓ Instant Wallet Credit Verified</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. PARENTS SAFETY PORTAL (Diagnostic System) -->
-  <section id="safety" class="glass-card-premium border-2 border-amber-500/30 bg-black/50">
-    <div class="text-center mb-12">
-      <h2 class="gold-metallic-text text-3xl font-black uppercase">Parents & Safety Transparency Hub</h2>
-      <p class="text-slate-500 text-xs mt-3 tracking-[0.4em] uppercase">Live Verification Diagnostic</p>
-    </div>
-    <div class="text-center mb-10">
-      <button onclick="runSafetyScan()" class="btn-premium text-xs px-12 py-4">Start 100% Transparency Scan</button>
-    </div>
-    <div id="log-term" class="bg-black p-10 rounded-[40px] border border-slate-800 font-mono text-green-400 text-xs h-48 overflow-y-auto leading-loose shadow-inner">
-      > [SYSTEM] STANDBY. Waiting for Parent Authentication...
-    </div>
-  </section>
-
-  <!-- 8. FAQ & CONTACT (FULL ORIGINAL) -->
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    <div class="glass-card-premium">
-      <h2 class="gold-metallic-text text-3xl font-black mb-10 uppercase">Official Support</h2>
-      <div class="space-y-8">
-        <div class="flex items-center gap-6 p-6 bg-slate-900 rounded-3xl border border-slate-800">
-          <i class="fa-brands fa-whatsapp text-green-500 text-4xl"></i>
-          <div><span class="text-xs text-slate-400 uppercase font-bold">Desk Support</span><br><strong class="text-white text-xl">+91 8877490845</strong></div>
-        </div>
-        <div class="flex items-center gap-6 p-6 bg-slate-900 rounded-3xl border border-slate-800">
-          <i class="fa-brands fa-telegram text-sky-400 text-4xl"></i>
-          <div><span class="text-xs text-slate-400 uppercase font-bold">Official Bot</span><br><strong class="text-white text-xl">@iois_admin_notification_bot</strong></div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="glass-card-premium">
-      <h2 class="gold-metallic-text text-3xl font-black mb-10 uppercase">FAQ</h2>
-      <div class="space-y-5">
-        <details class="bg-slate-900 rounded-2xl p-5 border border-slate-800"><summary class="cursor-pointer font-black text-amber-400 uppercase">पेआउट कब मिलता है?</summary><p class="text-sm text-slate-400 mt-4 italic">IOIS का मुख्य आकर्षण ही "Instant Payout" है। रेफरल के जुड़ते ही पैसा तुरंत प्राप्त होता है।</p></details>
-        <details class="bg-slate-900 rounded-2xl p-5 border border-slate-800"><summary class="cursor-pointer font-black text-amber-400 uppercase">क्या डेटा सुरक्षित है?</summary><p class="text-sm text-slate-400 mt-4 italic">बिल्कुल। हम 256-बिट एन्क्रिप्शन का उपयोग करते हैं और पेरेंट्स के लिए लाइव ट्रैकिंग की सुविधा देते हैं।</p></details>
-      </div>
-    </div>
-  </section>
-
+<!-- CONTACT HUB -->
+<section id="contact-hub" class="space-y-6"><div class="glass-card-gold p-6 sm:p-10 rounded-3xl text-center space-y-6"><h2 class="text-2xl sm:text-3xl font-black text-white">📞 24x7 <span class="gold-text">आधिकारिक सपोर्ट हेल्पलाइन</span></h2><p class="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto">किसी भी सहायता, वेरिफिकेशन पास की पुष्टि या पेआउट से जुड़े सवाल के लिए हमारे आधिकारिक चैनलों पर संपर्क करें:</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl mx-auto pt-2">
+<a href="https://wa.me/918877490845" target="_blank" class="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500 transition text-center block space-y-2"><div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto"><i data-lucide="message-square" class="w-5 h-5"></i></div><h4 class="text-white font-bold text-sm">WhatsApp सपोर्ट</h4><p class="text-emerald-400 font-bold text-xs">+91 8877490845</p></a>
+<a href="https://t.me/ioisplatform" target="_blank" class="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-sky-500 transition text-center block space-y-2"><div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center mx-auto"><i data-lucide="send" class="w-5 h-5"></i></div><h4 class="text-white font-bold text-sm">Telegram चैनल</h4><p class="text-sky-400 font-bold text-xs">@ioisplatform</p></a>
+<a href="mailto:ioisplatform@gmail.com" class="p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-amber-500 transition text-center block space-y-2"><div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto"><i data-lucide="mail" class="w-5 h-5"></i></div><h4 class="text-white font-bold text-sm">आधिकारिक ईमेल</h4><p class="text-amber-400 font-bold text-xs">ioisplatform@gmail.com</p></a>
+</div></div></section>
 </main>
 
-<footer class="bg-slate-950 border-t border-slate-900 py-20 text-center">
-    <div class="container mx-auto">
-        <div class="flex justify-center gap-14 text-4xl mb-12">
-            <a href="https://t.me/ioisplatform" class="text-sky-400 hover:scale-125 transition"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://wa.me/918877490845" class="text-green-500 hover:scale-125 transition"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
-        <p class="gold-metallic-text text-2xl font-black uppercase tracking-[0.6em]">IOIS PLATFORM</p>
-        <p class="text-slate-600 text-xs mt-4 uppercase font-bold tracking-widest">© 2026 IOIS National Digital Infrastructure Project. All Rights Reserved.</p>
-    </div>
-</footer>
+<footer class="border-t border-slate-800 bg-slate-950 py-8 text-center text-xs text-slate-500 space-y-2"><p>© 2026 IOIS PLATFORM - Indian Online Income Supporting System. All Rights Reserved.</p><p class="text-[11px] text-slate-600">Secure 256-Bit SSL Encrypted | Verified Digital Learning Ecosystem</p></footer>
+
+<!-- AI CHAT MODAL -->
+<div id="ai-chat-modal" class="fixed inset-0 z-[60] bg-black/75 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+<div class="bg-slate-950 border border-amber-500/50 rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden">
+<div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between"><div class="flex items-center gap-3"><div class="w-10 h-10 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center"><i data-lucide="sparkles" class="w-5 h-5 text-amber-400"></i></div><div><h3 class="text-white font-black text-sm">IOIS Smart AI Assistant</h3><p class="text-[10px] text-emerald-400 font-bold">CONTEXTUAL ASSISTANT • ONLINE</p></div></div><button onclick="closeAIChat()" class="text-slate-400 hover:text-white"><i data-lucide="x" class="w-5 h-5"></i></button></div>
+<div id="chat-messages" class="h-[55vh] max-h-[520px] overflow-y-auto space-y-3 p-4 text-xs sm:text-sm"></div>
+<div id="chat-suggestions" class="px-4 pb-3 flex gap-2 overflow-x-auto"></div>
+<div class="p-4 border-t border-slate-800 bg-slate-950"><div class="flex gap-2"><input type="text" id="ai-input" placeholder="अपना पूरा सवाल लिखें..." autocomplete="off" onkeydown="if(event.key==='Enter'){event.preventDefault();sendAIMessage()}" class="flex-1 bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-3 text-xs sm:text-sm outline-none focus:border-amber-400"><button onclick="sendAIMessage()" class="px-4 py-3 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black rounded-xl text-xs">भेजें</button></div><p class="text-[9px] text-slate-600 mt-2">यह चैट स्थानीय knowledge engine पर चलती है.</p></div>
+</div></div>
 
 <script>
-  // 1. ALL 15 INTERVIEW QUESTIONS (PSYCHOLOGY BASED)
-  const qData = [
-    { q: "1. आपका परिचय और आपके जीवन का सबसे बड़ा वित्तीय विज़न क्या है?", o: ["मैं एक डिजिटल एम्पायर खड़ा करना चाहता हूँ", "सिर्फ अपनी जरूरतें पूरी करना चाहता हूँ"] },
-    { q: "2. क्या आप राहुल की तरह अपने घर का खर्च डिजिटल आज़ादी से चलाना चाहते हैं?", o: ["हाँ, यही मेरा संकल्प है", "शायद, अगर सही मार्गदर्शन मिले"] },
-    { q: "3. क्या आप दिन में कम से कम 2-3 घंटे डिजिटल स्किल और नेटवर्किंग को दे सकते हैं?", o: ["बिल्कुल, मैं समर्पित हूँ", "कोशिश करूँगा"] },
-    { q: "4. क्या आप बड़े मुनाफे के लिए छोटा 'वेरिफिकेशन पास' (Pass) लेने का साहस रखते हैं?", o: ["जोखिम ही सफलता की पहली सीढ़ी है", "हाँ, पर जानकारी के बाद"] },
-    { q: "5. क्या आप राहुल और प्रिया जैसे अन्य लोगों को वित्तीय रूप से स्वतंत्र बनाने में गर्व महसूस करेंगे?", o: ["हाँ, साथ मिलकर बढ़ेंगे", "जी हाँ"] },
-    { q: "6. अगर आपको महीने का ₹1 लाख मिले, तो आप सबसे पहले क्या करेंगे?", o: ["परिवार का सपना पूरा करूँगा", "बिजनेस को और बढ़ाऊंगा"] },
-    { q: "7. क्या आप टेक्नोलॉजी और AI टूल्स का उपयोग करके तेजी से बढ़ना चाहते हैं?", o: ["हाँ, मॉडर्न तरीका ही बेस्ट है", "बिल्कुल"] },
-    { q: "8. क्या आप मानते हैं कि आप एक 'लीडर' (Master Level) बनने के योग्य हैं?", o: ["मुझे खुद पर 100% भरोसा है", "हाँ, मैं बन सकता हूँ"] },
-    { q: "9. क्या आपको 'Instant Payout' सिस्टम पर भरोसा है?", o: ["हाँ, यही पूर्ण पारदर्शिता है", "बिल्कुल भरोसा है"] },
-    { q: "10. क्या आप एक ऐसा नेटवर्क चाहते हैं जो आपके सोने पर भी आपको कमा कर दे?", o: ["यही तो असली आज़ादी है", "हाँ, ज़रूर"] },
-    { q: "11. क्या आप मानते हैं कि ₹10 का एंट्री पास आपकी लाइफ बदल सकता है?", o: ["छोटी शुरुआत बड़ा बदलाव लाती है", "हाँ, मानता हूँ"] },
-    { q: "12. क्या आप मेहनत और ईमानदारी के साथ हमारे साथ जुड़ना चाहते हैं?", o: ["हाँ, निष्ठा के साथ", "जी हाँ"] },
-    { q: "13. क्या आप अपने सपनों के लिए आज ही निर्णय लेने को तैयार हैं?", o: ["मैं जुनूनी हूँ!", "हाँ, बिल्कुल"] },
-    { q: "14. क्या आप आज ही अपना 'वेरिफाइड पास' प्राप्त करना चाहेंगे?", o: ["हाँ, अब देर नहीं", "तैयार हूँ"] },
-    { q: "15. क्या आप IOIS प्लेटफार्म की पारदर्शिता के साथ गर्व से जुड़ना चाहते हैं?", o: ["हाँ, मुझे गर्व है!", "जी हाँ"] }
-  ];
+lucide.createIcons();
 
-  let curQ = 0;
+const FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSdIEpw4EU8bqPSxkH_Ku9RCabSyw4RrrZ32ydbLHTo-wPIohw/viewform?usp=header';
 
-  function startEval() {
-    document.getElementById('intro-btn-area').classList.add('hidden');
-    document.getElementById('questions-area').classList.remove('hidden');
-    showQ();
-  }
+function toggleMobileMenu(){
+ const menu=document.getElementById('mobile-menu');
+ menu.classList.toggle('hidden');
+ menu.classList.toggle('flex');
+}
 
-  function showQ() {
-    const box = document.getElementById('questions-area');
-    if (curQ < qData.length) {
-      box.innerHTML = `
-        <h3 class="text-white text-3xl font-black mb-12 tracking-tight leading-snug">Assessment ${curQ + 1}: ${qData[curQ].q}</h3>
-        ${qData[curQ].o.map(opt => `<button class="opt-btn" onclick="nextQ()">➔ ${opt}</button>`).join('')}
-      `;
-    } else {
-      box.classList.add('hidden');
-      document.getElementById('welcome-vision').classList.remove('hidden');
-      document.getElementById('assessment').scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+const PLANS=[
+{n:1,name:'Bal Vikas Access',price:10,payout:7,pct:'70%',color:'orange',features:['Class 1-5 NCERT डिजिटल PDFs','एक्टिविटी व लर्निंग शीट्स','₹7 तुरंत प्रति रेफरल पेआउट']},
+{n:2,name:'Youth Skill Access',price:49,payout:34,pct:'70%',color:'sky',features:['Pro ATS Resume Templates','AI Prompts Mastery E-Book','₹34 तुरंत प्रति रेफरल पेआउट']},
+{n:3,name:'Career & Job Access',price:99,payout:64,pct:'65%',color:'indigo',features:['Class 6-12 Complete Books Kit','Career Streams Roadmap','₹64 तुरंत प्रति रेफरल पेआउट']},
+{n:4,name:'Family VIP Access',price:199,payout:119,pct:'60%',color:'emerald',features:['Screen Time Control Guide','Cyber Safety & Fraud Alert Kit','₹119 तुरंत प्रति रेफरल पेआउट']},
+{n:5,name:'Student Elite Access',price:299,payout:179,pct:'60%',color:'purple',features:['SSC, Railway, Banking Notes','Speed Math & Static GK','₹179 तुरंत प्रति रेफरल पेआउट']},
+{n:6,name:'Agency Reseller Hub',price:499,payout:274,pct:'55%',color:'yellow',features:['WhatsApp ऑटोमेशन बॉट स्क्रिप्ट्स','लैंडिंग पेज व रीसेलिंग लाइसेंस','₹274 तुरंत प्रति रेफरल पेआउट']},
+{n:7,name:'Lifetime Master Access',price:999,payout:499,pct:'50%',color:'amber',features:['सभी 6 प्लान्स पूरी तरह अनलॉक्ड','VIP एडमिन डायरेक्ट मेंटरशिप','आजीवन मुफ्त अपडेट्स','₹499 का सबसे बड़ा प्रति-रेफरल पेआउट']}
+];
 
-  function nextQ() { curQ++; showQ(); }
+function renderPlans(){
+ const grid=document.getElementById('plans-grid');
+ grid.innerHTML=PLANS.map(p=>{
+  const master=p.n===7;
+  const card=master?'glass-card-gold p-6 sm:p-8 rounded-3xl border-2 border-amber-400 md:col-span-2 lg:col-span-3 flex flex-col lg:flex-row items-center justify-between gap-6':'glass-card p-6 rounded-3xl border border-'+p.color+'-500/40 flex flex-col justify-between';
+  return `<div class="${card}"><div class="space-y-4 ${master?'max-w-2xl':''}">
+  <div class="flex items-center justify-between gap-2 flex-wrap"><span class="bg-${p.color}-500/20 text-${p.color}-400 border border-${p.color}-500/40 text-xs font-black px-3 py-1 rounded-full">${master?'👑 PLAN 07 (SUPREME MASTER TIER)':'PLAN 0'+p.n}</span><span class="text-emerald-400 font-extrabold text-xs">${p.pct} Payout</span></div>
+  <h3 class="${master?'text-3xl':'text-2xl'} font-black text-white">${p.name}</h3>
+  <div class="flex items-baseline gap-2"><span class="text-3xl font-black text-${p.color}-400">₹${p.price}</span><span class="text-xs text-slate-400">/ ${p.n===1?'एंट्री पास':'लाइफटाइम'}</span><span class="ml-auto text-xs bg-emerald-950/80 text-emerald-300 px-2 py-1 rounded-lg border border-emerald-500/30">पेआउट: ₹${p.payout}</span></div>
+  <ul class="text-xs text-slate-300 space-y-1.5 border-t border-slate-800 pt-3">${p.features.map(x=>`<li>• ${x}</li>`).join('')}</ul>
+  ${master?'<p class="text-sm text-slate-300">IOIS का सबसे बड़ा प्लान। पिछले सभी 6 प्लान्स का अनलॉक्ड एक्सेस, VIP मेंटरशिप और सबसे बड़ा तत्काल payout.</p>':''}
+  </div><div class="${master?'shrink-0 w-full lg:w-72 bg-slate-950/90 p-6 rounded-2xl border border-amber-500/40 text-center space-y-4':'mt-6 w-full'}"><div class="${master?'':'hidden'}"><span class="text-xs text-slate-400 uppercase font-bold">वन-टाइम लाइफटाइम फीस</span><div class="text-4xl font-black gold-text">₹999</div><span class="text-xs text-emerald-400 font-bold">पेआउट: ₹499</span></div><a href="${FORM_URL}" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-gradient-to-r from-${p.color}-400 to-yellow-500 text-slate-950 font-black text-xs text-center block transition transform hover:scale-105">${master?'MASTER PLAN 07 एक्टिवेट करें':'PLAN 0'+p.n+' एक्टिवेट करें (₹'+p.price+')'}</a></div></div>`;
+ }).join('');
+}
+renderPlans();
 
-  // 2. LIVE CLOCK (STRAIGHT DIGITS)
-  function upClock() {
-    const now = new Date();
-    document.getElementById('main-time').textContent = now.toLocaleTimeString('en-US', { hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    document.getElementById('main-dt').textContent = now.toLocaleDateString('hi-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
-    const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-    document.getElementById('main-s').style.transform = `translateX(-50%) rotate(${s * 6}deg)`;
-    document.getElementById('main-m').style.transform = `translateX(-50%) rotate(${m * 6 + s * 0.1}deg)`;
-    document.getElementById('main-h').style.transform = `translateX(-50%) rotate(${(h % 12) * 30 + m * 0.5}deg)`;
-  }
+function setTickerSpeed(speed){const ticker=document.getElementById('ticker-content');ticker.className='animate-ticker '+speed+' text-slate-200 font-medium space-x-8';['btn-pause','btn-slow','btn-normal','btn-fast'].forEach(id=>{const b=document.getElementById(id);if(b)b.className='px-2 py-0.5 rounded bg-slate-900 border border-slate-700 text-slate-300'});const b=document.getElementById('btn-'+(speed==='paused'?'pause':speed));if(b)b.className='px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold'}
+function calculatePayout(){const payoutPerPerson=parseInt(document.getElementById('calc-plan').value);const count=parseInt(document.getElementById('calc-count').value);document.getElementById('calc-count-label').innerText=count+' लोग';document.getElementById('calc-total').innerText='₹'+(payoutPerPerson*count).toLocaleString('en-IN')}
 
-  // 3. INSTANT PAYOUT CALC
-  function upCalc() {
-    const p = parseInt(document.getElementById('p-select').value);
-    const r = parseInt(document.getElementById('r-range').value);
-    document.getElementById('r-val').textContent = r;
-    document.getElementById('total-val').textContent = '₹' + (p * r).toLocaleString('en-IN');
-  }
+// लाइव डिजिटल और प्रीमियम एनालॉग घड़ी अपडेट लॉजिक (सप्तरंगी कांटे और पूरे 12 डिजिट)
+function updateClock(){
+  const now=new Date();
+  
+  // डिजिटल डिस्प्ले अपडेट
+  document.getElementById('live-digital-time').innerText = now.toLocaleTimeString('en-US',{timeZone:'Asia/Kolkata',hour12:true});
+  document.getElementById('live-digital-date').innerText = now.toLocaleDateString('hi-IN',{timeZone:'Asia/Kolkata',weekday:'long',year:'numeric',month:'long',day:'numeric'});
 
-  // 4. SAFETY SCAN
-  function runSafetyScan() {
-    const term = document.getElementById('log-term');
-    term.innerHTML = "> Scanning National Infrastructure API...\n";
-    const logs = [
-      "> [OK] military-grade encryption verified.",
-      "> [OK] Instant Payout protocol check passed.",
-      "> [OK] Telegram bot notification sync active.",
-      "> [SUCCESS] 100% Transparency Verified for IOIS PLATFORM."
-    ];
-    let i = 0;
-    const intrv = setInterval(() => {
-      if(i < logs.length) { term.innerHTML += logs[i] + "\n"; term.scrollTop = term.scrollHeight; i++; } 
-      else { clearInterval(intrv); }
-    }, 700);
-  }
+  // एनालॉग घड़ी कांटे का कैलकुलेशन
+  const hours = now.getHours();
+  const minutes = now.getMinutes();
+  const seconds = now.getSeconds();
 
-  setInterval(upClock, 1000);
-  upClock();
-  upCalc();
+  const secondDeg = (seconds / 60) * 360;
+  const minuteDeg = ((minutes + seconds / 60) / 60) * 360;
+  const hourDeg = ((hours % 12 + minutes / 60) / 12) * 360;
+
+  const secHand = document.getElementById('second-hand');
+  const minHand = document.getElementById('minute-hand');
+  const hrHand = document.getElementById('hour-hand');
+
+  if(secHand) secHand.style.transform = `rotate(${secondDeg}deg)`;
+  if(minHand) minHand.style.transform = `rotate(${minuteDeg}deg)`;
+  if(hrHand) hrHand.style.transform = `rotate(${hourDeg}deg)`;
+}
+setInterval(updateClock,1000);
+updateClock();
+calculatePayout();
+
+/* WELCOME CHECK-IN WIZARD LOGIC (5 INTRO QUESTIONS) */
+const introQuestions=[
+{q:'1. आप IOIS (Indian Online Income Supporting System) प्लेटफॉर्म पर मुख्य रूप से क्या करने आए हैं?',opts:['अध्ययन सामग्री और उपयोगी डिजिटल कोर्सेज सीखने','ऑनलाइन कमाई और रेफरल सपोर्ट प्राप्त करने','नवीनतम जॉब्स और अपडेट्स देखने','ऊपर की सभी चीजें']},
+{q:'2. आपको IOIS प्लेटफॉर्म के बारे में कहाँ से पता चला?',opts:['सोशल मीडिया या YouTube शॉर्ट्स से','किसी मित्र या परिचित के द्वारा','WhatsApp या Telegram ग्रुप से','Google सर्च या डायरेक्ट']},
+{q:'3. आप IOIS के बारे में पहले से कितना जानते हैं?',opts:['यह मेरा पहला दिन है, बिल्कुल नया हूँ','मुझे थोड़ा बहुत पता है','मैं नियमित रूप से अपडेट देखता हूँ','मैं पूरी तरह परिचित हूँ']},
+{q:'4. आपकी वर्तमान मुख्य प्राथमिकता इनमें से क्या है?',opts:['छात्र (पढ़ाई व नोट्स)','नौकरी की तलाश (Job Seeker)','ऑनलाइन कार्य व डिजिटल इनकम','परिवार व बच्चों की डिजिटल सुरक्षा']},
+{q:'5. क्या आपको पहले कभी किसी डिजिटल कार्य या प्लेटफॉर्म पर कोई परेशानी या समस्या आई है?',opts:['नहीं, सब ठीक है','हाँ, मार्गदर्शन की कमी थी','हाँ, सही जानकारी नहीं मिलती थी','मैं और अधिक पारदर्शिता चाहता/चाहती हूँ']}
+];
+
+let introState={active:false,index:0,answers:[]};
+
+function startInitialCheckIn(choice){
+ if(!choice){
+  document.getElementById('welcome-wizard-box').innerHTML=`<div class="space-y-4"><div class="w-14 h-14 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto border border-emerald-500/30"><i data-lucide="check" class="w-7 h-7"></i></div><h3 class="text-2xl font-black text-white">कोई बात नहीं! आप सीधे नीचे दिए गए सेक्शन्स का आनंद ले सकते हैं</h3><p class="text-slate-300 text-sm">आप चाहें तो नीचे प्लेटफॉर्म गाइड, 7 मास्टर प्लान्स, पेआउट कैलकुलेटर या 15-प्रश्न इंटरव्यू देख सकते हैं.</p><div class="pt-2"><a href="#about-iois" class="px-6 py-3 rounded-xl bg-amber-400 text-slate-950 font-black text-xs uppercase inline-block">प्लेटफॉर्म गाइड देखें</a></div></div>`;
+  lucide.createIcons();
+  return;
+ }
+ introState={active:true,index:0,answers:[]};
+ renderIntroQuestion();
+}
+
+function renderIntroQuestion(){
+ const box=document.getElementById('welcome-wizard-box');
+ const idx=introState.index;
+ if(idx>=introQuestions.length){
+  box.innerHTML=`<div class="space-y-4 py-4"><div class="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto border border-amber-500/40"><i data-lucide="award" class="w-8 h-8"></i></div><span class="text-xs font-black text-amber-400 uppercase">चेक-इन पूर्ण हुआ!</span><h3 class="text-2xl font-black text-white">धन्यवाद! आपके शुरुआती उत्तर दर्ज हो गए हैं।</h3><p class="text-slate-300 text-sm max-w-lg mx-auto">अब आप नीचे दिए गए 15-प्रश्न वास्तविक इंटरव्यू में भाग ले सकते हैं या सीधे हमारे 7 मास्टर प्लान्स देख सकते हैं.</p><div class="flex flex-wrap justify-center gap-3 pt-3"><a href="#interview-portal" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-xs uppercase">15-प्रश्न इंटरव्यू शुरू करें</a><a href="#plans-section" class="px-6 py-3 rounded-xl bg-slate-900 border border-slate-700 text-white font-bold text-xs uppercase">सभी प्लान्स देखें</a></div></div>`;
+  lucide.createIcons();
+  return;
+ }
+ const qObj=introQuestions[idx];
+ box.innerHTML=`<div class="space-y-4 text-left max-w-2xl mx-auto"><div class="flex justify-between items-center text-xs font-bold text-amber-400 mb-2"><span>शुरुआती चेक-इन प्रश्न ${idx+1} / 5</span><span>${Math.round(((idx+1)/5)*100)}% पूर्ण</span></div><h3 class="text-lg sm:text-xl font-black text-white leading-snug">${qObj.q}</h3><div class="space-y-2.5 pt-2">${qObj.opts.map((opt,i)=>`<button onclick="answerIntro(${i})" class="w-full text-left p-3.5 rounded-xl border border-slate-700 bg-slate-900/90 text-slate-200 text-sm hover:border-amber-400 transition flex items-center gap-3"><span class="w-6 h-6 rounded-full bg-slate-800 text-amber-400 font-black text-xs flex items-center justify-center shrink-0">${String.fromCharCode(65+i)}</span><span>${opt}</span></button>`).join('')}</div></div>`;
+ lucide.createIcons();
+}
+
+function answerIntro(optIndex){
+ introState.answers.push(optIndex);
+ introState.index++;
+ renderIntroQuestion();
+}
+
+/* 15-QUESTION MAIN INTERVIEW */
+const interview=[
+['सबसे पहले, आप IOIS जैसे डिजिटल प्लेटफॉर्म से क्या हासिल करना चाहते हैं?',['अध्ययन और उपयोगी डिजिटल सामग्री','नौकरी और करियर तैयारी','डिजिटल बिजनेस और रेफरल अवसर','AI, ऑटोमेशन और कई संसाधनों का व्यापक उपयोग']],
+['आप प्रतिदिन डिजिटल सीखने या काम के लिए कितना समय वास्तविक रूप से दे सकते हैं?',['30 मिनट से 1 घंटा','1 से 2 घंटे','2 से 4 घंटे','4 घंटे से अधिक या पूर्ण समय']],
+['आपकी वर्तमान स्थिति इनमें से किसके सबसे करीब है?',['स्कूल/कॉलेज विद्यार्थी','जॉब सीकर या शुरुआती प्रोफेशनल','प्रतियोगी परीक्षा की तैयारी','डिजिटल काम या बिजनेस करने वाला व्यक्ति']],
+['आपकी सबसे बड़ी तत्काल जरूरत क्या है?',['बेसिक शैक्षणिक सामग्री','Resume, job और AI resources','Competitive exam notes','Automation, resale और business resources']],
+['शुरुआत में आपका बजट किस स्तर का रखना आपके लिए सहज है?',['₹10 के आसपास','₹49 से ₹99','₹199 से ₹299','₹499 से ₹999']],
+['आप रेफरल सिस्टम को किस तरह समझते हैं?',['सिर्फ जानकारी साझा करने का तरीका','उपयोगी सामग्री साझा करके पात्र incentive पाने का तरीका','एक गंभीर digital growth activity','मैं पहले पूरी policy समझना चाहता/चाहती हूँ']],
+['अगर किसी व्यक्ति को आपका referral उपयोगी लगे, तो आप क्या करेंगे?',['उसे सामग्री और सही जानकारी दूँगा/दूँगी','उसकी जरूरत के अनुसार plan समझाऊँगा/समझाऊँगी','उसे official details और terms पढ़ने को कहूँगा/कहूँगी','बिना पुष्टि किए कोई दावा नहीं करूँगा/करूँगी']],
+['AI tools के प्रति आपका अनुभव कैसा है?',['लगभग नया हूँ','कुछ basic अनुभव है','नियमित रूप से इस्तेमाल करता/करती हूँ','AI और automation को काम का मुख्य हिस्सा बनाना चाहता/चाहती हूँ']],
+['डिजिटल सुरक्षा में सबसे महत्वपूर्ण व्यवहार कौन सा है?',['OTP/UPI PIN किसी से साझा न करना','हर लिंक पर तुरंत क्लिक करना','पासवर्ड सार्वजनिक रखना','payment screenshot में सारी sensitive information दिखाना']],
+['आप सीखने की सामग्री किस format में अधिक उपयोग करना पसंद करेंगे?',['PDF और worksheets','Resume/templates और guides','Exam notes और practice material','Automation scripts, tools और comprehensive resources']],
+['यदि किसी payout की eligibility verification पर निर्भर हो, तो आप क्या करेंगे?',['Official verification पूरा करूँगा/करूँगी','Terms पढ़कर required proof दूँगा/दूँगी','Support से स्थिति पूछूँगा/पूछूँगी','बिना verification के payout को guaranteed नहीं मानूँगा/मानूँगी']],
+['आपका referral approach कैसा होना चाहिए?',['ईमानदार और जरूरत-आधारित','स्पष्ट plan details के साथ','बिना spam किए relevant लोगों तक','Policy और consent का पालन करते हुए']],
+['आप किस प्रकार के परिणाम को सबसे अधिक महत्व देते हैं?',['Learning value','Career readiness','Responsible earning opportunity','Long-term digital capability']],
+['Plan चुनते समय सबसे महत्वपूर्ण factor क्या होना चाहिए?',['मेरी वास्तविक जरूरत','मेरी क्षमता और समय','सामग्री का value','Budget और लागू terms']],
+['इंटरव्यू के बाद आप अगला कदम कैसे लेना चाहेंगे?',['पहले ₹10 से शुरुआत','अपनी जरूरत वाला plan चुनना','सभी 7 plans compare करना','पहले official support से पुष्टि करना']]
+];
+
+let interviewState={index:0,answers:[],score:0};
+function renderInterview(){
+ const box=document.getElementById('interview-box');const i=interviewState.index;
+ if(i>=interview.length){showInterviewResult();return}
+ const q=interview[i];
+ box.innerHTML=`<div class="bg-slate-950/80 border border-slate-800 rounded-3xl p-5 sm:p-7"><div class="flex items-center justify-between gap-3 mb-5"><span class="text-xs font-black text-amber-400">प्रश्न ${i+1} / ${interview.length}</span><div class="w-40 h-2 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-orange-400 via-white to-green-500" style="width:${((i+1)/interview.length)*100}%"></div></div></div><h3 class="text-lg sm:text-2xl font-black text-white leading-relaxed">${q[0]}</h3><p class="text-slate-400 text-xs sm:text-sm mt-2 leading-6">कृपया वही विकल्प चुनें जो आपके वास्तविक लक्ष्य और स्थिति को सबसे सही दर्शाता है।</p><div class="grid gap-3 mt-6">${q[1].map((o,k)=>`<button class="interview-option w-full text-left p-4 rounded-2xl border border-slate-700 bg-slate-900/80 text-slate-200 text-sm leading-6" onclick="answerInterview(${k})"><span class="inline-flex w-7 h-7 rounded-full bg-slate-800 text-amber-300 items-center justify-center font-black mr-2">${String.fromCharCode(65+k)}</span>${o}</button>`).join('')}</div><div class="mt-5 flex justify-between text-xs text-slate-500"><span>उत्तर चुनते ही अगला प्रश्न खुलेगा</span><span>${i+1} / 15</span></div></div>`;
+}
+function answerInterview(k){interviewState.answers.push(k);interviewState.score+=k;interviewState.index++;renderInterview()}
+function showInterviewResult(){
+ const a=interviewState.answers;const avg=a.reduce((x,y)=>x+y,0)/a.length;
+ let plan=PLANS[0],reason='आपकी प्राथमिकता और शुरुआती जरूरत के अनुसार ₹10 का Bal Vikas Access सबसे सरल शुरुआत देता है.';
+ if(avg>=2.7){plan=PLANS[6];reason='आपने व्यापक डिजिटल संसाधन, अधिक समय, AI/automation और long-term उपयोग की ओर मजबूत प्राथमिकता दिखाई है.'}
+ else if(avg>=2.05){plan=PLANS[5];reason='आपके उत्तरों में digital work, automation और business-oriented उपयोग की पर्याप्त प्राथमिकता दिखाई देती है.'}
+ else if(avg>=1.45){plan=PLANS[4];reason='आपके उत्तर career/exam और structured learning की ओर अधिक केंद्रित हैं.'}
+ else if(avg>=1){plan=PLANS[1];reason='आपकी जरूरत job, skill और AI-supported career resources के साथ अच्छी तरह मेल खाती है.'}
+ else if(avg>=.5){plan=PLANS[2];reason='आपकी जरूरत school-to-career learning और structured resources से अधिक मेल खाती है.'}
+ document.getElementById('interview-box').innerHTML=`<div class="bg-slate-950/90 border border-emerald-500/40 rounded-3xl p-6 sm:p-8 text-center"><div class="w-16 h-16 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center mx-auto"><i data-lucide="check-circle-2" class="w-8 h-8 text-emerald-400"></i></div><span class="text-xs font-black text-emerald-400 uppercase block mt-4">INTERVIEW COMPLETED</span><h3 class="text-2xl sm:text-3xl font-black text-white mt-2">आपके उत्तरों के आधार पर परिणाम तैयार है</h3><p class="text-slate-300 text-sm leading-7 mt-4">${reason}</p><div class="mt-5 p-5 rounded-2xl bg-amber-500/10 border border-amber-500/30"><p class="text-xs text-amber-300 font-bold">RECOMMENDED STARTING PLAN</p><div class="text-3xl font-black text-white mt-1">${plan.name} — ₹${plan.price}</div><p class="text-sm text-emerald-400 mt-2">दिखाया गया referral payout: ₹${plan.payout}</p></div><div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"><a href="${FORM_URL}" target="_blank" rel="noopener noreferrer" class="py-3 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black text-sm">इस सुझाए गए प्लान को देखें</a><a href="#plans-section" class="py-3 rounded-xl border border-slate-700 bg-slate-900 text-white font-black text-sm">सभी 7 प्लान देखें</a></div><button onclick="restartInterview()" class="mt-4 text-xs text-slate-400 hover:text-amber-300">इंटरव्यू दोबारा शुरू करें</button></div>`;lucide.createIcons()}
+function restartInterview(){interviewState={index:0,answers:[],score:0};renderInterview()}
+renderInterview();
+
+const faqs=[
+['IOIS Platform क्या है?','IOIS (Indian Online Income Supporting System) एक डिजिटल पोर्टल के रूप में प्रस्तुत किया गया है जहाँ learning resources, career सामग्री, AI-related resources, safety guidance और referral-based incentive information को एक जगह रखा गया है. उपयोगकर्ता को किसी भी plan को activate करने से पहले उसकी कीमत, सामग्री और लागू terms समझनी चाहिए.'],
+['IOIS में कुल कितने plans हैं?','इस version में 7 मुख्य plans दिखाए गए हैं: ₹10, ₹49, ₹99, ₹199, ₹299, ₹499 और ₹999. प्रत्येक plan की सामग्री और प्रदर्शित payout अलग है.'],
+['सबसे सस्ता plan कौन सा है?','Plan 01 Bal Vikas Access की कीमत ₹10 दिखाई गई है. इसमें Class 1-5 NCERT digital PDFs, activity/learning sheets और ₹7 displayed referral payout शामिल है.'],
+['₹49 plan में क्या मिलता है?','Plan 02 Youth Skill Access ₹49 का है. इसमें Pro ATS Resume Templates, AI Prompts Mastery E-Book और ₹34 displayed referral payout दिया गया है.'],
+['₹99 plan किसके लिए है?','Plan 03 Career & Job Access ₹99 का है और इसमें Class 6-12 Complete Books Kit, Career Streams Roadmap तथा ₹64 displayed referral payout है.'],
+['₹199 Family VIP Access में क्या है?','Plan 04 में Screen Time Control Guide, Cyber Safety & Fraud Alert Kit और ₹119 displayed referral payout दिया गया है.'],
+['₹299 Student Elite Access में क्या है?','Plan 05 में SSC, Railway और Banking Notes, Speed Math तथा Static GK resources और ₹179 displayed referral payout है.'],
+['₹499 Agency Reseller Hub में क्या मिलता है?','Plan 06 में WhatsApp automation bot scripts, landing page और reselling license से संबंधित resources तथा ₹274 displayed referral payout दिखाया गया है.'],
+['₹999 Master plan में क्या मिलता है?','Plan 07 Lifetime Master Access में पिछले छह plans का unlocked access, VIP mentorship, lifetime updates और ₹499 displayed referral payout बताया गया है.'],
+['Referral payout क्या है?','Referral payout वह incentive amount है जो displayed plan structure के अनुसार पात्र और verified referral activity से संबंधित है. इसे निश्चित या guaranteed income नहीं मानना चाहिए.'],
+['क्या payout तुरंत मिलता है?','साइट पर payout को instant/verification-based बताया गया है, लेकिन वास्तविक payment eligibility और processing verification तथा लागू terms पर निर्भर हो सकती है. किसी payout को बिना verification के guaranteed न मानें.'],
+['क्या ₹10 से शुरुआत की जा सकती है?','हाँ, इस interface में Plan 01 की entry price ₹10 है. नए उपयोगकर्ता के लिए यह सबसे कम-price starting option के रूप में दिखाया गया है.'],
+['क्या कोई व्यक्ति सभी plans ले सकता है?','Interface में सभी plans उपलब्ध हैं, लेकिन किसी व्यक्ति को multiple plans लेने की आवश्यकता या पात्रता उसके उद्देश्य और लागू conditions पर निर्भर करेगी. केवल कमाई के उद्देश्य से अनावश्यक payment न करें.'],
+['क्या Plan 07 में सभी plans शामिल हैं?','इस platform description में Plan 07 को पिछले सभी छह plans के unlocked access के साथ प्रस्तुत किया गया है. वास्तविक access की पुष्टि activation/verification process से करें.'],
+['Payment कैसे करना है?','वर्तमान interface में “GET VERIFIED PASS” और plan activation buttons official Google Form की ओर ले जाते हैं. payment करने से पहले form और plan details की पुष्टि करें और किसी अनधिकृत व्यक्ति को payment न भेजें.'],
+['क्या UPI PIN देना चाहिए?','नहीं. UPI PIN, OTP, ATM PIN, banking password या login credentials किसी support व्यक्ति या chat में साझा नहीं करने चाहिए.'],
+['क्या payment screenshot भेजना सुरक्षित है?','केवल उतनी जानकारी साझा करें जितनी verification के लिए आवश्यक हो. Screenshot में OTP, UPI PIN, card details या अन्य अत्यधिक संवेदनशील जानकारी दिखाई दे तो उसे साझा न करें.'],
+['क्या IOIS नौकरी देता है?','यह interface learning, career resources और digital support प्रदान करने की बात करता है. इसे किसी specific employer की guaranteed job offer के रूप में नहीं समझना चाहिए.'],
+['क्या referral से guaranteed income होती है?','नहीं. displayed payout एक incentive structure है; वास्तविक परिणाम referrals, verification, eligibility, user activity और लागू नियमों पर निर्भर कर सकते हैं.'],
+['AI Assistant क्या कर सकता है?','यह single-file version plans, payout structure, interview, FAQ, safety और general platform navigation से संबंधित प्रश्नों का contextual उत्तर देने के लिए local knowledge engine इस्तेमाल करता है.'],
+['क्या chatbot सचमुच external ChatGPT API से जुड़ा है?','इस single-file version में external AI API call नहीं की गई है. Chatbot local contextual engine से API-जैसा conversational अनुभव देता है. वास्तविक generative AI API जोड़ने के लिए सुरक्षित backend/API endpoint और credentials management जरूरी होगा.'],
+['Chatbot गलत जवाब दे तो क्या करें?','महत्वपूर्ण payment, legal या account decision के लिए chatbot को अंतिम authority न मानें. official support channel से पुष्टि करें और plan/terms की मूल जानकारी पढ़ें.'],
+['Interview कितने प्रश्नों का है?','नया user interview में 15 प्रश्न हैं. प्रत्येक प्रश्न एक-एक करके आता है और चार विकल्प देता है.'],
+['Interview के बाद क्या होता है?','सभी 15 उत्तरों को aggregate करके उपयोगकर्ता की प्राथमिकता का एक recommendation profile बनाया जाता है. फिर एक starting plan और कारण दिखाया जाता है, साथ में सभी plans देखने का दूसरा विकल्प मिलता है.'],
+['क्या interview का एक ही सही answer है?','यह interview personality/need assessment की तरह बनाया गया है. विकल्पों का उद्देश्य उपयोगकर्ता की वास्तविक जरूरत समझना है, इसलिए इसे school exam की तरह सही-गलत test नहीं समझना चाहिए.'],
+['क्या interview दोबारा दिया जा सकता है?','हाँ. परिणाम स्क्रीन पर “इंटरव्यू दोबारा शुरू करें” विकल्प दिया गया है. इससे assessment फिर से शुरू किया जा सकता है.'],
+['FAQ कहाँ है?','FAQ section में 35 विस्तृत प्रश्न और उनके पूरे explanatory answers दिए गए हैं. इसे navigation bar के “सामान्य प्रश्न” link से भी खोला जा सकता है.'],
+['Privacy policy क्या बताती है?','Privacy section बताता है कि उपयोगकर्ता की दी गई जानकारी service, verification, support और communication जैसे purposes में उपयोग हो सकती है. Third-party services की अपनी privacy policies भी हो सकती हैं.'],
+['Referral policy क्यों जरूरी है?','Referral policy गलत accounts, self-referral, fraud, spam और misleading promotion जैसी गतिविधियों से बचने और eligible referral activity की सीमाएँ स्पष्ट करने के लिए है.'],
+['Return policy क्या है?','Digital content की प्रकृति के कारण return/refund eligibility service status, delivery, applicable terms और कानून पर निर्भर कर सकती है. Payment से पहले plan details ध्यान से पढ़ें.'],
+['क्या IOIS financial advice देता है?','नहीं. Platform की general earning information को financial, investment, tax या legal advice का विकल्प नहीं समझना चाहिए.'],
+['Support से कैसे संपर्क करें?','Official support hub में WhatsApp number +91 8877490845, Telegram @ioisplatform और email ioisplatform@gmail.com दिए गए हैं.'],
+['क्या Telegram/WhatsApp पर OTP भेज सकते हैं?','नहीं. OTP, UPI PIN, ATM PIN, passwords और banking login information किसी व्यक्ति को नहीं भेजनी चाहिए.'],
+['क्या platform पर दिखाई गई member count या payout guarantee है?','नहीं. Interface में displayed statistics और payout figures को informational display के रूप में देखें; किसी व्यक्तिगत earning या future result की guarantee न समझें.']
+];
+document.getElementById('faq-list').innerHTML=faqs.map((f,i)=>`<details class="bg-slate-950/80 border border-slate-800 rounded-2xl p-5"><summary class="cursor-pointer font-bold text-amber-300 leading-6">${i+1}. ${f[0]}</summary><div class="mt-4 pt-4 border-t border-slate-800 text-slate-300 text-sm leading-7"><strong class="text-white">पूरा उत्तर:</strong> ${f[1]}</div></details>`).join('');
+
+const knowledge=[
+{keys:['hello','hi','नमस्ते','हेलो','namaste'],reply:'नमस्ते! आपका स्वागत है। मैं IOIS के plans, displayed payout, 15-question interview, FAQ, activation process, safety और support channels को समझाने में आपकी मदद कर सकता हूँ. आप अपना पूरा सवाल लिखें, जैसे “₹49 plan में क्या मिलता है?” या “मेरे लिए कौन सा plan ठीक रहेगा?”'},
+{keys:['plan 01','plan 1','₹10','10 plan','bal vikas'],reply:'Plan 01 — Bal Vikas Access ₹10 का entry pass है. इसमें Class 1-5 NCERT digital PDFs, activity और learning sheets तथा ₹7 displayed referral payout शामिल है. Activation के लिए official GET VERIFIED PASS form उपलब्ध है.'},
+{keys:['plan 02','plan 2','₹49','49 plan','youth skill'],reply:'Plan 02 — Youth Skill Access ₹49 का lifetime plan है. इसमें Pro ATS Resume Templates, AI Prompts Mastery E-Book और ₹34 displayed referral payout है.'},
+{keys:['plan 03','plan 3','₹99','99 plan','career'],reply:'Plan 03 — Career & Job Access ₹99 का lifetime plan है. इसमें Class 6-12 Complete Books Kit, Career Streams Roadmap और ₹64 displayed referral payout दिया गया है.'},
+{keys:['plan 04','plan 4','₹199','199 plan','family'],reply:'Plan 04 — Family VIP Access ₹199 का lifetime plan है. इसमें Screen Time Control Guide, Cyber Safety & Fraud Alert Kit और ₹119 displayed referral payout है.'},
+{keys:['plan 05','plan 5','₹299','299 plan','student elite'],reply:'Plan 05 — Student Elite Access ₹299 का lifetime plan है. इसमें SSC, Railway, Banking Notes, Speed Math और Static GK तथा ₹179 displayed referral payout है.'},
+{keys:['plan 06','plan 6','₹499','499 plan','agency','reseller'],reply:'Plan 06 — Agency Reseller Hub ₹499 का lifetime plan है. इसमें WhatsApp automation bot scripts, landing page/reselling resources और ₹274 displayed referral payout है.'},
+{keys:['plan 07','plan 7','₹999','999 plan','master','supreme'],reply:'Plan 07 — Lifetime Master Access ₹999 का master tier है. इसमें पिछले 6 plans का unlocked access, VIP mentorship, lifetime updates और ₹499 displayed referral payout बताया गया है.'},
+{keys:['payout','पेआउट','कमाई','earning','referral'],reply:'Displayed referral payouts plan के अनुसार ₹7, ₹34, ₹64, ₹119, ₹179, ₹274 और ₹499 हैं. इन्हें guaranteed income नहीं समझना चाहिए; वास्तविक payout eligibility, verification और लागू terms पर निर्भर हो सकता है.'},
+{keys:['interview','इंटरव्यू','question','प्रश्न'],reply:'नया user interview 15 questions का है. हर प्रश्न में चार options हैं और एक समय में केवल एक प्रश्न दिखता है. सभी उत्तरों के बाद आपकी प्राथमिकताओं के आधार पर recommended starting plan और “सभी 7 प्लान देखें” विकल्प मिलता है.'},
+{keys:['faq','सवाल','प्रश्नोत्तर'],reply:'FAQ section में 35 पूरे प्रश्न और विस्तृत उत्तर हैं. इनमें plans, payout, payment, security, privacy, referral, return, support, interview और AI assistant से संबंधित सामान्य user queries शामिल हैं.'},
+{keys:['payment','भुगतान','upi','pay'],reply:'Activation के लिए official GET VERIFIED PASS/plan buttons Google Form खोलते हैं. Payment से पहले plan price और details की पुष्टि करें. UPI PIN, OTP या banking password कभी साझा न करें.'},
+{keys:['support','सपोर्ट','contact','संपर्क'],reply:'Official support details: WhatsApp +91 8877490845, Telegram @ioisplatform और email ioisplatform@gmail.com. संवेदनशील credentials साझा किए बिना समस्या का स्पष्ट विवरण भेजें.'},
+{keys:['privacy','गोपनीयता'],reply:'Privacy policy section में data use, service/verification/support purposes और third-party services की privacy considerations समझाई गई हैं. अनावश्यक sensitive information साझा न करें.'},
+{keys:['return','refund','रिफंड','वापसी'],reply:'Digital content के लिए return/refund eligibility service status, delivery, applicable terms और कानून पर निर्भर कर सकती है. Payment से पहले details पढ़ें और technical/payment issue होने पर official support से संपर्क करें.'},
+{keys:['safe','सुरक्षा','fraud','scam','otp','pin'],reply:'सबसे जरूरी नियम: OTP, UPI PIN, ATM PIN, banking password या login credentials किसी व्यक्ति को न दें. किसी भी payment से पहले official channel और plan details verify करें.'}
+];
+
+function normalize(s){return s.toLowerCase().replace(/[^\p{L}\p{N}₹% ]/gu,' ')}
+function scoreKnowledge(text,keys){let score=0;for(const k of keys){if(text.includes(k.toLowerCase()))score+=k.length>3?3:1}return score}
+function makeAIReply(text){
+ const t=normalize(text);let best=null,bestScore=0;
+ for(const item of knowledge){const s=scoreKnowledge(t,item.keys);if(s>bestScore){bestScore=s;best=item}}
+ if(best)return best.reply;
+ if(t.includes('कौन सा')||t.includes('मेरे लिए')||t.includes('which')||t.includes('recommend'))return 'मैं recommendation देने से पहले आपकी वास्तविक जरूरत समझना चाहूँगा. आप छात्र हैं, job seeker हैं, competitive exam की तैयारी करते हैं या digital business/automation में रुचि रखते हैं? अगर आप चाहें तो “इंटरव्यू शुरू करो” लिखें और 15 प्रश्नों वाला assessment पूरा करें.';
+ if(t.includes('क्या है')||t.includes('कैसे काम'))return 'IOIS को digital learning, career resources, AI/automation resources और referral-based incentive information वाले portal के रूप में प्रस्तुत किया गया है. किसी plan को activate करने से पहले उसकी कीमत, सामग्री और लागू terms अवश्य पढ़ें.';
+ return 'आपका सवाल समझने की कोशिश कर रहा हूँ. मैं IOIS के 7 plans, displayed referral payouts, payment/verification process, 15-question interview, 35-question FAQ, safety, privacy, referral policy, return policy और support channels पर विस्तृत जानकारी दे सकता हूँ. कृपया सवाल थोड़ा और स्पष्ट लिखें—उदाहरण के लिए “₹199 plan में क्या मिलता है?”, “payout कैसे काम करता है?”, या “मेरे लिए कौन सा plan सही है?”';
+}
+
+function addChatMessage(text,type='ai'){
+ const box=document.getElementById('chat-messages');const div=document.createElement('div');div.className=(type==='user'?'chat-user':'chat-ai')+' p-3 rounded-2xl text-slate-200 leading-6 whitespace-pre-wrap';div.textContent=text;box.appendChild(div);box.scrollTop=box.scrollHeight;
+}
+function showTyping(){const box=document.getElementById('chat-messages');const div=document.createElement('div');div.id='typing';div.className='chat-ai p-3 rounded-2xl text-slate-400';div.innerHTML='<span class="animate-pulse">उत्तर तैयार किया जा रहा है…</span>';box.appendChild(div);box.scrollTop=box.scrollHeight}
+function openAIChat(){const m=document.getElementById('ai-chat-modal');m.classList.remove('hidden');m.classList.add('flex');if(!document.getElementById('chat-messages').children.length){addChatMessage('नमस्ते! मैं आपका IOIS Smart Assistant हूँ। मैं आपके सवाल के context के अनुसार plans, payout, interview, FAQ, safety, privacy और activation process समझा सकता हूँ. आप पूरा सवाल लिखें।')}renderSuggestions();setTimeout(()=>document.getElementById('ai-input').focus(),150)}
+function closeAIChat(){const m=document.getElementById('ai-chat-modal');m.classList.add('hidden');m.classList.remove('flex')}
+function renderSuggestions(){document.getElementById('chat-suggestions').innerHTML=['₹49 plan में क्या मिलता है?','मेरे लिए कौन सा plan सही है?','Interview शुरू करो','Payout कैसे काम करता है?'].map(x=>`<button onclick="quickAsk(${JSON.stringify(x)})" class="shrink-0 px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 text-[10px]">${x}</button>`).join('')}
+function quickAsk(x){document.getElementById('ai-input').value=x;sendAIMessage()}
+function sendAIMessage(){const input=document.getElementById('ai-input');const text=input.value.trim();if(!text)return;addChatMessage(text,'user');input.value='';showTyping();setTimeout(()=>{const t=document.getElementById('typing');if(t)t.remove();addChatMessage(makeAIReply(text));},650)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAIChat()});
 </script>
-
 </body>
 </html>
